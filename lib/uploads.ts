@@ -25,7 +25,13 @@ export async function saveImageFile(
   const buffer = Buffer.from(await file.arrayBuffer());
   const safeFolder = folder.replace(/[^a-z0-9-]/gi, "");
   const filename = `${Date.now()}-${randomUUID().slice(0, 8)}.webp`;
-  const directory = path.join(process.cwd(), "public", "uploads", safeFolder);
+  const directory = path.join(
+    process.cwd(),
+    "public",
+    "assets",
+    "uploads",
+    safeFolder,
+  );
 
   await fs.mkdir(directory, { recursive: true });
   await sharp(buffer)
@@ -34,5 +40,5 @@ export async function saveImageFile(
     .webp({ quality })
     .toFile(path.join(directory, filename));
 
-  return `/uploads/${safeFolder}/${filename}`;
+  return `/assets/uploads/${safeFolder}/${filename}`;
 }

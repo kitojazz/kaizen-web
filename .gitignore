@@ -2,8 +2,8 @@ node_modules
 .next
 out
 .env*.local
-public/uploads/*
-!public/uploads/.gitkeep
+public/assets/uploads/*
+!public/assets/uploads/.gitkeep
 *.log
 .DS_Store
 tsconfig.tsbuildinfo
