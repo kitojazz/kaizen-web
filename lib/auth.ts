@@ -15,7 +15,13 @@ export type AdminSession = {
 };
 
 function secret() {
-  return process.env.AUTH_SECRET || "kaizen-development-secret";
+  const value = process.env.AUTH_SECRET;
+  if (!value) {
+    throw new Error(
+      "Falta la variable de entorno AUTH_SECRET. Definila antes de iniciar la app.",
+    );
+  }
+  return value;
 }
 
 function sign(value: string) {
