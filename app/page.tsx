@@ -85,7 +85,7 @@ export default async function Home() {
   const services = sortServices(content.services);
   const posts = getPublishedPosts(content.posts);
   const { hero } = content;
-  const teamNames = team.slice(0, 3).map((member) => member.name).join(" · ");
+  const teamNames = team.slice(0, 3).map((member) => member.name.split(" ")[0]).join(" · ");
   const serviceOptions = [...services.map((service) => service.title), "Otro"];
 
   const schema = {

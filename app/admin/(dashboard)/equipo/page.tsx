@@ -103,6 +103,19 @@ export default async function AdminTeamPage({
                 />
               </div>
               <div className="sm:col-span-2">
+                <label htmlFor="linkedin" className="field-label">
+                  LinkedIn
+                </label>
+                <input
+                  id="linkedin"
+                  name="linkedin"
+                  type="url"
+                  maxLength={300}
+                  placeholder="https://www.linkedin.com/in/..."
+                  className="field-input"
+                />
+              </div>
+              <div className="sm:col-span-2">
                 <label htmlFor="description" className="field-label">
                   Descripción o rol <span className="text-blue-text">*</span>
                 </label>
@@ -217,6 +230,20 @@ export default async function AdminTeamPage({
                           type="number"
                           min={1}
                           defaultValue={member.order}
+                          className="field-input"
+                        />
+                      </div>
+                      <div className="sm:col-span-2">
+                        <label className="field-label" htmlFor={`linkedin-${member.id}`}>
+                          LinkedIn
+                        </label>
+                        <input
+                          id={`linkedin-${member.id}`}
+                          name="linkedin"
+                          type="url"
+                          maxLength={300}
+                          defaultValue={member.linkedin ?? ""}
+                          placeholder="https://www.linkedin.com/in/..."
                           className="field-input"
                         />
                       </div>

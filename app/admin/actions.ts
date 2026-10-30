@@ -122,6 +122,7 @@ export async function createTeamMember(data: FormData) {
     const name = requireValue(text(data, "name"), "nombre");
     const role = requireValue(text(data, "role"), "cargo");
     const description = requireValue(text(data, "description"), "descripción");
+    const linkedin = text(data, "linkedin");
     const photo = await saveImageFile(data.get("photo"), {
       folder: "team",
       width: 1400,
@@ -135,6 +136,7 @@ export async function createTeamMember(data: FormData) {
       role,
       photo,
       description,
+      linkedin,
       order: numberValue(data, "order", 99),
     };
 
@@ -164,6 +166,7 @@ export async function updateTeamMember(data: FormData) {
     const name = requireValue(text(data, "name"), "nombre");
     const role = requireValue(text(data, "role"), "cargo");
     const description = requireValue(text(data, "description"), "descripción");
+    const linkedin = text(data, "linkedin");
     const uploaded = await saveImageFile(data.get("photo"), {
       folder: "team",
       width: 1400,
@@ -180,6 +183,7 @@ export async function updateTeamMember(data: FormData) {
               name,
               role,
               description,
+              linkedin,
               photo,
               order: numberValue(data, "order", member.order),
             }

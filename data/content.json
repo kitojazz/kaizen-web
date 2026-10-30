@@ -5,17 +5,17 @@
     "supportImages": [
       {
         "id": "hero-support-1",
-        "image": "/images/avatar-1.webp",
+        "image": "/images/team-rodrigo.webp",
         "alt": "Rodrigo, dirección técnica y asuntos regulatorios"
       },
       {
         "id": "hero-support-2",
-        "image": "/images/avatar-2.webp",
+        "image": "/images/team-bruno.webp",
         "alt": "Bruno, calidad e inocuidad alimentaria"
       },
       {
         "id": "hero-support-3",
-        "image": "/images/avatar-3.webp",
+        "image": "/images/team-adelina.webp",
         "alt": "Adelina, ingeniería de alimentos"
       }
     ]
@@ -23,27 +23,39 @@
   "team": [
     {
       "id": "team-rodrigo",
-      "name": "Rodrigo",
+      "name": "Rodrigo Duran",
       "role": "Dirección técnica y asuntos regulatorios",
-      "photo": "/images/avatar-1.webp",
+      "photo": "/images/team-rodrigo.webp",
       "description": "Coordina los proyectos regulatorios y acompaña la relación con los organismos, desde el diagnóstico hasta la habilitación y el registro.",
+      "linkedin": "https://www.linkedin.com/in/rodrigo-duran-94201b83/",
       "order": 1
     },
     {
       "id": "team-bruno",
-      "name": "Bruno",
+      "name": "Bruno Roggero Silva",
       "role": "Calidad e inocuidad alimentaria",
-      "photo": "/images/avatar-2.webp",
+      "photo": "/images/team-bruno.webp",
       "description": "Trabaja en sistemas de calidad, BPM, HACCP y auditorías, integrando los controles documentales con la operación real de la planta.",
+      "linkedin": "https://www.linkedin.com/in/bruno-roggero-silva-09a5772b2/",
       "order": 2
     },
     {
       "id": "team-adelina",
-      "name": "Adelina",
+      "name": "Adelina Rubio Galain",
       "role": "Ingeniería de alimentos",
-      "photo": "/images/avatar-3.webp",
+      "photo": "/images/team-adelina.webp",
       "description": "Aporta el conocimiento de producto y proceso: formulación, vida útil, escalado y coherencia técnica entre lo que se declara y lo que se elabora.",
+      "linkedin": "https://www.linkedin.com/in/adelina-rubio-galain-b683a32a2/",
       "order": 3
+    },
+    {
+      "id": "team-vannina",
+      "name": "Vannina Mirci",
+      "role": "Ingeniería química y procesos",
+      "photo": "/images/team-vannina.webp",
+      "description": "Aporta la mirada de ingeniería química y de procesos, con experiencia en la industria alimentaria, para que lo documentado refleje cómo se opera realmente.",
+      "linkedin": "https://www.linkedin.com/in/vannina-mirci-31a5a1191/",
+      "order": 4
     }
   ],
   "posts": [

@@ -201,6 +201,14 @@ export function WhatsApp(props: IconProps) {
   );
 }
 
+export function LinkedIn(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M4 9h3.5v11H4zM5.75 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM10 9h3.3v1.5c.5-.9 1.7-1.8 3.4-1.8 3.2 0 3.8 2.1 3.8 4.8V20H17v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V20H10z" />
+    </Svg>
+  );
+}
+
 export function Play(props: IconProps) {
   return (
     <Svg {...props}>

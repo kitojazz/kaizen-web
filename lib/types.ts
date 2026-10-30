@@ -16,6 +16,7 @@ export type TeamMember = {
   role: string;
   photo: string;
   description: string;
+  linkedin?: string;
   order: number;
 };
 

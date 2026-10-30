@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { LinkedIn } from "@/components/icons";
 import type { TeamMember } from "@/lib/types";
 
 export default function Team({ members }: { members: TeamMember[] }) {
@@ -42,7 +43,20 @@ export default function Team({ members }: { members: TeamMember[] }) {
               />
             </div>
             <div className="min-w-0">
-              <p className="text-[12.5px] font-extrabold text-ink">{member.name}</p>
+              <div className="flex items-center gap-1.5">
+                <p className="text-[12.5px] font-extrabold text-ink">{member.name}</p>
+                {member.linkedin ? (
+                  <a
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`LinkedIn de ${member.name}`}
+                    className="text-blue-text transition hover:text-blue"
+                  >
+                    <LinkedIn className="h-3.5 w-3.5" fill="currentColor" strokeWidth={0} />
+                  </a>
+                ) : null}
+              </div>
               <p className="text-[9.5px] font-bold uppercase tracking-[0.05em] text-blue-text">
                 {member.role}
               </p>
