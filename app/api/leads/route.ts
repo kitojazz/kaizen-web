@@ -1,8 +1,6 @@
-import { randomUUID } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
-import { updateContent } from "@/lib/content";
+import { createLead } from "@/lib/content";
 import { rateLimit } from "@/lib/rate-limit";
-import type { Lead } from "@/lib/types";
 
 export const runtime = "nodejs";
 
@@ -64,23 +62,8 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const lead: Lead = {
-    id: randomUUID(),
-    name,
-    email,
-    phone,
-    company,
-    service,
-    message,
-    createdAt: new Date().toISOString(),
-    status: "new",
-  };
-
   try {
-    await updateContent((content) => {
-      content.leads.unshift(lead);
-      return content;
-    });
+    await createLead({ name, email, phone, company, service, message });
   } catch {
     return NextResponse.json(
       {
