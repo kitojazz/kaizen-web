@@ -9,14 +9,25 @@ import {
   startSession,
   validateCredentials,
 } from "@/lib/auth";
-import { getContent, updateContent } from "@/lib/content";
+import {
+  deleteLead as removeLead,
+  deletePost as removePost,
+  deleteService as removeService,
+  deleteTeamMember as removeTeamMember,
+  getContent,
+  savePost,
+  saveHero,
+  saveService,
+  saveTeamMember,
+  slugExists,
+  toggleLead,
+} from "@/lib/content";
 import { rateLimit, resetRateLimit } from "@/lib/rate-limit";
 import { saveImageFile } from "@/lib/uploads";
 import { slugify } from "@/lib/utils";
 import type {
   BlogPost,
   HeroSupportImage,
-  Lead,
   Service,
   TeamMember,
 } from "@/lib/types";
@@ -140,10 +151,7 @@ export async function createTeamMember(data: FormData) {
       order: numberValue(data, "order", 99),
     };
 
-    await updateContent((content) => {
-      content.team.push(member);
-      return content;
-    });
+    await saveTeamMember(member);
   } catch (caught) {
     error = errorMessage(caught);
   }
@@ -175,21 +183,15 @@ export async function updateTeamMember(data: FormData) {
     const photo = uploaded || text(data, "currentPhoto");
     if (!photo) throw new Error("El integrante necesita una fotografía.");
 
-    await updateContent((content) => {
-      content.team = content.team.map((member) =>
-        member.id === id
-          ? {
-              ...member,
-              name,
-              role,
-              description,
-              linkedin,
-              photo,
-              order: numberValue(data, "order", member.order),
-            }
-          : member,
-      );
-      return content;
+    const existing = current.team.find((member) => member.id === id)!;
+    await saveTeamMember({
+      ...existing,
+      name,
+      role,
+      description,
+      linkedin,
+      photo,
+      order: numberValue(data, "order", existing.order),
     });
   } catch (caught) {
     error = errorMessage(caught);
@@ -202,10 +204,7 @@ export async function updateTeamMember(data: FormData) {
 export async function deleteTeamMember(data: FormData) {
   assertAdmin();
   const id = text(data, "id");
-  await updateContent((content) => {
-    content.team = content.team.filter((member) => member.id !== id);
-    return content;
-  });
+  await removeTeamMember(id);
   redirectWith("/admin/equipo", "success", "Integrante eliminado.");
 }
 
@@ -243,15 +242,11 @@ export async function updateHero(data: FormData) {
       });
     }
 
-    await updateContent((content) => {
-      content.hero = {
-        backgroundImage,
-        backgroundAlt:
-          text(data, "backgroundAlt") ||
-          "Imagen principal de Kaizen alimentos",
-        supportImages,
-      };
-      return content;
+    await saveHero({
+      backgroundImage,
+      backgroundAlt:
+        text(data, "backgroundAlt") || "Imagen principal de Kaizen alimentos",
+      supportImages,
     });
   } catch (caught) {
     error = errorMessage(caught);
@@ -277,11 +272,10 @@ export async function createPost(data: FormData) {
     });
     if (!coverImage) throw new Error("Seleccioná una imagen de portada.");
 
-    const current = await getContent();
     const requestedSlug = slugify(text(data, "slug") || title);
     let slug = requestedSlug || `nota-${Date.now()}`;
     let suffix = 2;
-    while (current.posts.some((post) => post.slug === slug)) {
+    while (await slugExists(slug)) {
       slug = `${requestedSlug}-${suffix}`;
       suffix += 1;
     }
@@ -302,10 +296,7 @@ export async function createPost(data: FormData) {
       updatedAt: now,
     };
 
-    await updateContent((content) => {
-      content.posts.push(post);
-      return content;
-    });
+    await savePost(post);
   } catch (caught) {
     error = errorMessage(caught);
   }
@@ -339,35 +330,23 @@ export async function updatePost(data: FormData) {
     const requestedSlug = slugify(text(data, "slug") || title) || existing.slug;
     let slug = requestedSlug;
     let suffix = 2;
-    while (
-      current.posts.some((post) => post.slug === slug && post.id !== existing.id)
-    ) {
+    while (await slugExists(slug, existing.id)) {
       slug = `${requestedSlug}-${suffix}`;
       suffix += 1;
     }
 
-    await updateContent((content) => {
-      content.posts = content.posts.map((post) =>
-        post.id === id
-          ? {
-              ...post,
-              slug,
-              title,
-              tag,
-              excerpt,
-              content: contentText,
-              coverImage,
-              coverAlt: text(data, "coverAlt") || title,
-              published: data.get("published") === "on",
-              publishedAt: parseDate(
-                text(data, "publishedAt"),
-                post.publishedAt,
-              ),
-              updatedAt: new Date().toISOString(),
-            }
-          : post,
-      );
-      return content;
+    await savePost({
+      ...existing,
+      slug,
+      title,
+      tag,
+      excerpt,
+      content: contentText,
+      coverImage,
+      coverAlt: text(data, "coverAlt") || title,
+      published: data.get("published") === "on",
+      publishedAt: parseDate(text(data, "publishedAt"), existing.publishedAt),
+      updatedAt: new Date().toISOString(),
     });
   } catch (caught) {
     error = errorMessage(caught);
@@ -380,10 +359,7 @@ export async function updatePost(data: FormData) {
 export async function deletePost(data: FormData) {
   assertAdmin();
   const id = text(data, "id");
-  await updateContent((content) => {
-    content.posts = content.posts.filter((post) => post.id !== id);
-    return content;
-  });
+  await removePost(id);
   redirectWith("/admin/blog", "success", "Artículo eliminado.");
 }
 
@@ -423,10 +399,7 @@ export async function createService(data: FormData) {
       order: numberValue(data, "order", 99),
     };
 
-    await updateContent((content) => {
-      content.services.push(service);
-      return content;
-    });
+    await saveService(service);
   } catch (caught) {
     error = errorMessage(caught);
   }
@@ -442,9 +415,8 @@ export async function updateService(data: FormData) {
   try {
     const id = requireValue(text(data, "id"), "servicio");
     const current = await getContent();
-    if (!current.services.some((service) => service.id === id)) {
-      throw new Error("El servicio ya no existe.");
-    }
+    const existing = current.services.find((service) => service.id === id);
+    if (!existing) throw new Error("El servicio ya no existe.");
 
     const title = requireValue(text(data, "title"), "título");
     const shortDescription = requireValue(
@@ -463,26 +435,19 @@ export async function updateService(data: FormData) {
     const image = uploaded || text(data, "currentImage");
     if (!image) throw new Error("El servicio necesita una imagen.");
 
-    await updateContent((content) => {
-      content.services = content.services.map((service) =>
-        service.id === id
-          ? {
-              ...service,
-              title,
-              shortDescription,
-              description,
-              image,
-              imageAlt: text(data, "imageAlt") || title,
-              icon: text(data, "icon") || service.icon,
-              labels: listValue(data, "labels"),
-              keywords: text(data, "keywords"),
-              ctaLabel: text(data, "ctaLabel") || "Consultar",
-              ctaHref: safeHref(text(data, "ctaHref") || "#contacto"),
-              order: numberValue(data, "order", service.order),
-            }
-          : service,
-      );
-      return content;
+    await saveService({
+      ...existing,
+      title,
+      shortDescription,
+      description,
+      image,
+      imageAlt: text(data, "imageAlt") || title,
+      icon: text(data, "icon") || existing.icon,
+      labels: listValue(data, "labels"),
+      keywords: text(data, "keywords"),
+      ctaLabel: text(data, "ctaLabel") || "Consultar",
+      ctaHref: safeHref(text(data, "ctaHref") || "#contacto"),
+      order: numberValue(data, "order", existing.order),
     });
   } catch (caught) {
     error = errorMessage(caught);
@@ -495,33 +460,20 @@ export async function updateService(data: FormData) {
 export async function deleteService(data: FormData) {
   assertAdmin();
   const id = text(data, "id");
-  await updateContent((content) => {
-    content.services = content.services.filter((service) => service.id !== id);
-    return content;
-  });
+  await removeService(id);
   redirectWith("/admin/servicios", "success", "Servicio eliminado.");
 }
 
 export async function toggleLeadStatus(data: FormData) {
   assertAdmin();
   const id = text(data, "id");
-  await updateContent((content) => {
-    content.leads = content.leads.map((lead) =>
-      lead.id === id
-        ? ({ ...lead, status: lead.status === "new" ? "read" : "new" } as Lead)
-        : lead,
-    );
-    return content;
-  });
+  await toggleLead(id);
   redirectWith("/admin/mensajes", "success", "Estado del mensaje actualizado.");
 }
 
 export async function deleteLead(data: FormData) {
   assertAdmin();
   const id = text(data, "id");
-  await updateContent((content) => {
-    content.leads = content.leads.filter((lead) => lead.id !== id);
-    return content;
-  });
+  await removeLead(id);
   redirectWith("/admin/mensajes", "success", "Mensaje eliminado.");
 }
