@@ -17,7 +17,7 @@ export default function Blog({
 
   if (visible.length === 0) {
     return (
-      <div className="mt-9 rounded-[24px] border border-dashed border-line bg-white p-8 text-center text-[13px] text-body">
+      <div className="navy-surface mt-9 border-dashed p-8 text-center text-[13px] text-navy-soft">
         Todavía no hay artículos publicados.
       </div>
     );
@@ -29,13 +29,13 @@ export default function Blog({
         {visible.map((post) => (
           <article
             key={post.id}
-            className="card-hover group flex flex-col overflow-hidden rounded-[22px] border border-line bg-white"
+            className="navy-surface navy-card group flex flex-col"
           >
             <Link
               href={`/blog/${post.slug}`}
               className="flex h-full flex-col focus-visible:outline-none"
             >
-              <div className="relative aspect-[16/9] overflow-hidden bg-[#dce9f7]">
+              <div className="relative aspect-[16/9] overflow-hidden bg-navy-deep">
                 <Image
                   src={post.coverImage}
                   alt={post.coverAlt}
@@ -44,21 +44,21 @@ export default function Blog({
                   className="object-cover transition duration-700 group-hover:scale-[1.04]"
                 />
                 <div className="post-photo-overlay absolute inset-0" />
-                <span className="absolute left-4 top-4 rounded-full bg-white/95 px-2.5 py-1 text-[8.5px] font-extrabold uppercase tracking-[0.12em] text-[#526176] shadow-sm backdrop-blur-md">
+                <span className="absolute left-4 top-4 rounded-full border border-white/10 bg-navy/80 px-2.5 py-1 text-[8.5px] font-extrabold uppercase tracking-[0.12em] text-celeste shadow-sm backdrop-blur-md">
                   {post.tag}
                 </span>
               </div>
               <div className="flex flex-1 flex-col p-5">
-                <p className="text-[9px] font-extrabold uppercase tracking-[0.12em] text-muted">
+                <p className="text-[9px] font-extrabold uppercase tracking-[0.12em] text-navy-soft">
                   {formatDateLong(post.publishedAt)}
                 </p>
-                <h3 className="mt-2 font-display text-[19px] font-extrabold leading-[1.2] tracking-[-0.03em] text-ink">
+                <h3 className="mt-2 font-display text-[19px] font-extrabold leading-[1.2] tracking-[-0.03em] text-white">
                   {post.title}
                 </h3>
-                <p className="mt-2 flex-1 text-[12.5px] leading-6 text-body">
+                <p className="mt-2 flex-1 text-[12.5px] leading-6 text-navy-soft">
                   {post.excerpt}
                 </p>
-                <span className="mt-5 inline-flex w-fit items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-[0.06em] text-blue-text transition group-hover:gap-2.5">
+                <span className="mt-5 inline-flex w-fit items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-[0.06em] text-celeste transition group-hover:gap-2.5">
                   Leer nota
                   <ArrowRight className="h-4 w-4" />
                 </span>

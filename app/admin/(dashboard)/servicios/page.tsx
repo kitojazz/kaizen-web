@@ -1,15 +1,12 @@
 import Image from "next/image";
-import {
-  createService,
-  deleteService,
-  updateService,
-} from "@/app/admin/actions";
+import Link from "next/link";
+import { createService, deleteService } from "@/app/admin/actions";
 import AdminNotice from "@/components/admin/AdminNotice";
 import DeleteButton from "@/components/admin/DeleteButton";
 import ImageField from "@/components/admin/ImageField";
 import PageHeader from "@/components/admin/PageHeader";
 import SubmitButton from "@/components/admin/SubmitButton";
-import { Plus, Save } from "@/components/icons";
+import { ArrowRight, ExternalLink, Plus } from "@/components/icons";
 import { getServiceIcon, serviceIconOptions } from "@/components/service-icons";
 import { getContent, sortServices } from "@/lib/content";
 
@@ -28,7 +25,7 @@ export default async function AdminServicesPage({
       <PageHeader
         eyebrow="Contenido"
         title="Servicios"
-        description="Agregá, editá o eliminá los servicios que aparecen en el sitio. Cada tarjeta puede tener imagen, icono, descripciones y botón de acción."
+        description="Cada servicio tiene su propia ficha pública con contenido, etapas y preguntas frecuentes. Editá la ficha completa desde cada tarjeta."
       />
 
       <AdminNotice notice={searchParams?.notice} message={searchParams?.message} />
@@ -40,7 +37,7 @@ export default async function AdminServicesPage({
               Agregar servicio
             </h2>
             <p className="mt-1 text-[11.5px] text-muted">
-              Completá la información que verá el cliente en la web.
+              Después podés completar el contenido de la ficha y sus preguntas.
             </p>
           </div>
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-mist text-blue transition group-open:rotate-45">
@@ -87,6 +84,31 @@ export default async function AdminServicesPage({
                 />
               </div>
               <div>
+                <label htmlFor="slug" className="field-label">
+                  Dirección web
+                </label>
+                <input
+                  id="slug"
+                  name="slug"
+                  maxLength={80}
+                  placeholder="se genera desde el título"
+                  className="field-input"
+                />
+              </div>
+              <div>
+                <label htmlFor="category" className="field-label">
+                  Categoría / pestaña
+                </label>
+                <select id="category" name="category" className="field-input">
+                  <option value="">Sin categoría</option>
+                  {content.serviceCategories.map((category) => (
+                    <option key={category.id} value={category.name}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
                 <label htmlFor="icon" className="field-label">
                   Icono
                 </label>
@@ -111,6 +133,12 @@ export default async function AdminServicesPage({
                   className="field-input"
                 />
               </div>
+              <div className="flex items-end pb-2">
+                <label className="flex items-center gap-2 text-[12px] font-semibold text-ink">
+                  <input type="checkbox" name="featured" className="h-4 w-4" />
+                  Destacar en la portada
+                </label>
+              </div>
               <div className="sm:col-span-2">
                 <label htmlFor="shortDescription" className="field-label">
                   Descripción corta <span className="text-blue-text">*</span>
@@ -133,9 +161,21 @@ export default async function AdminServicesPage({
                   id="description"
                   name="description"
                   required
-                  rows={4}
+                  rows={3}
                   maxLength={1400}
                   placeholder="Alcance completo del servicio."
+                  className="field-input resize-y"
+                />
+              </div>
+              <div className="sm:col-span-2">
+                <label htmlFor="intro" className="field-label">
+                  Introducción de la ficha
+                </label>
+                <textarea
+                  id="intro"
+                  name="intro"
+                  rows={2}
+                  placeholder="Una o dos frases que abren la ficha individual."
                   className="field-input resize-y"
                 />
               </div>
@@ -184,7 +224,7 @@ export default async function AdminServicesPage({
                   id="ctaHref"
                   name="ctaHref"
                   maxLength={240}
-                  defaultValue="#contacto"
+                  defaultValue="/#contacto"
                   className="field-input"
                 />
               </div>
@@ -200,8 +240,15 @@ export default async function AdminServicesPage({
       </details>
 
       <div className="space-y-3">
-        {services.map((service) => {
+        {services.length === 0 ? (
+          <div className="rounded-[24px] border border-dashed border-line bg-white p-8 text-center text-[12.5px] text-body">
+            Todavía no hay servicios cargados. Agregue el primero con el
+            formulario de arriba.
+          </div>
+        ) : (
+          services.map((service) => {
           const Icon = getServiceIcon(service.icon);
+          const faqCount = content.faqs.filter((faq) => faq.serviceId === service.id).length;
           return (
             <article
               key={service.id}
@@ -218,12 +265,20 @@ export default async function AdminServicesPage({
                   />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <span className="grid h-8 w-8 place-items-center rounded-xl bg-mist text-blue">
                       <Icon className="h-4 w-4" />
                     </span>
                     <span className="rounded-full bg-mist px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-[0.1em] text-blue-text">
                       Orden {service.order}
+                    </span>
+                    {service.featured ? (
+                      <span className="rounded-full bg-[#e4f6ea] px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-[0.1em] text-[#0b7a3b]">
+                        Destacado
+                      </span>
+                    ) : null}
+                    <span className="rounded-full border border-line px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.1em] text-muted">
+                      {faqCount} {faqCount === 1 ? "pregunta" : "preguntas"}
                     </span>
                   </div>
                   <h2 className="mt-2 font-display text-[20px] font-extrabold leading-[1.2] tracking-[-0.03em] text-ink">
@@ -232,6 +287,7 @@ export default async function AdminServicesPage({
                   <p className="mt-1.5 text-[12px] leading-5 text-body">
                     {service.shortDescription}
                   </p>
+                  <p className="mt-1 text-[10.5px] text-muted">/servicios/{service.slug}</p>
                   <div className="mt-2 flex flex-wrap gap-1.5">
                     {service.labels.map((label) => (
                       <span
@@ -245,209 +301,36 @@ export default async function AdminServicesPage({
                 </div>
               </div>
 
-              <details className="mt-4 border-t border-line pt-4">
-                <summary className="flex w-fit cursor-pointer list-none items-center gap-2 rounded-full border border-line bg-[#f9fcff] px-3.5 py-2 text-[10.5px] font-bold text-ink transition hover:border-[#bdd4ea] hover:bg-white [&::-webkit-details-marker]:hidden">
-                  Editar servicio
-                </summary>
-
-                <form action={updateService} className="mt-4">
-                  <input type="hidden" name="id" value={service.id} />
-                  <div className="grid gap-5 lg:grid-cols-[260px_1fr]">
-                    <div>
-                      <ImageField
-                        name="image"
-                        label="Imagen"
-                        current={service.image}
-                        aspect="aspect-[16/10]"
-                      />
-                      <div className="mt-4">
-                        <label
-                          htmlFor={`imageAlt-${service.id}`}
-                          className="field-label"
-                        >
-                          Texto alternativo
-                        </label>
-                        <input
-                          id={`imageAlt-${service.id}`}
-                          name="imageAlt"
-                          maxLength={220}
-                          defaultValue={service.imageAlt}
-                          className="field-input"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid content-start gap-4 sm:grid-cols-2">
-                      <div className="sm:col-span-2">
-                        <label
-                          htmlFor={`title-${service.id}`}
-                          className="field-label"
-                        >
-                          Título
-                        </label>
-                        <input
-                          id={`title-${service.id}`}
-                          name="title"
-                          required
-                          maxLength={140}
-                          defaultValue={service.title}
-                          className="field-input"
-                        />
-                      </div>
-                      <div>
-                        <label
-                          htmlFor={`icon-${service.id}`}
-                          className="field-label"
-                        >
-                          Icono
-                        </label>
-                        <select
-                          id={`icon-${service.id}`}
-                          name="icon"
-                          defaultValue={service.icon}
-                          className="field-input"
-                        >
-                          {serviceIconOptions.map((option) => (
-                            <option key={option.value} value={option.value}>
-                              {option.label}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                      <div>
-                        <label
-                          htmlFor={`order-${service.id}`}
-                          className="field-label"
-                        >
-                          Orden
-                        </label>
-                        <input
-                          id={`order-${service.id}`}
-                          name="order"
-                          type="number"
-                          min={1}
-                          defaultValue={service.order}
-                          className="field-input"
-                        />
-                      </div>
-                      <div className="sm:col-span-2">
-                        <label
-                          htmlFor={`shortDescription-${service.id}`}
-                          className="field-label"
-                        >
-                          Descripción corta
-                        </label>
-                        <textarea
-                          id={`shortDescription-${service.id}`}
-                          name="shortDescription"
-                          required
-                          rows={2}
-                          maxLength={400}
-                          defaultValue={service.shortDescription}
-                          className="field-input resize-y"
-                        />
-                      </div>
-                      <div className="sm:col-span-2">
-                        <label
-                          htmlFor={`description-${service.id}`}
-                          className="field-label"
-                        >
-                          Descripción detallada
-                        </label>
-                        <textarea
-                          id={`description-${service.id}`}
-                          name="description"
-                          required
-                          rows={4}
-                          maxLength={1400}
-                          defaultValue={service.description}
-                          className="field-input resize-y"
-                        />
-                      </div>
-                      <div>
-                        <label
-                          htmlFor={`labels-${service.id}`}
-                          className="field-label"
-                        >
-                          Etiquetas
-                        </label>
-                        <input
-                          id={`labels-${service.id}`}
-                          name="labels"
-                          maxLength={180}
-                          defaultValue={service.labels.join(", ")}
-                          className="field-input"
-                        />
-                      </div>
-                      <div>
-                        <label
-                          htmlFor={`keywords-${service.id}`}
-                          className="field-label"
-                        >
-                          Palabras clave
-                        </label>
-                        <input
-                          id={`keywords-${service.id}`}
-                          name="keywords"
-                          maxLength={400}
-                          defaultValue={service.keywords}
-                          className="field-input"
-                        />
-                      </div>
-                      <div>
-                        <label
-                          htmlFor={`ctaLabel-${service.id}`}
-                          className="field-label"
-                        >
-                          Texto del botón
-                        </label>
-                        <input
-                          id={`ctaLabel-${service.id}`}
-                          name="ctaLabel"
-                          maxLength={60}
-                          defaultValue={service.ctaLabel}
-                          className="field-input"
-                        />
-                      </div>
-                      <div>
-                        <label
-                          htmlFor={`ctaHref-${service.id}`}
-                          className="field-label"
-                        >
-                          Destino del botón
-                        </label>
-                        <input
-                          id={`ctaHref-${service.id}`}
-                          name="ctaHref"
-                          maxLength={240}
-                          defaultValue={service.ctaHref}
-                          className="field-input"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-                    <SubmitButton>
-                      <Save className="h-4 w-4" />
-                      Guardar cambios
-                    </SubmitButton>
-                  </div>
-                </form>
-
-                <form
-                  action={deleteService}
-                  className="mt-3 border-t border-line pt-3"
-                >
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4">
+                <div className="flex flex-wrap items-center gap-2">
+                  <Link
+                    href={`/admin/servicios/${service.id}`}
+                    className="inline-flex items-center gap-2 rounded-full bg-navy px-4 py-2 text-[10.5px] font-bold text-white transition hover:bg-[#16283f]"
+                  >
+                    Editar ficha completa
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                  <Link
+                    href={`/servicios/${service.slug}`}
+                    target="_blank"
+                    className="inline-flex items-center gap-2 rounded-full border border-line bg-[#f9fcff] px-4 py-2 text-[10.5px] font-bold text-ink transition hover:border-[#bdd4ea] hover:bg-white"
+                  >
+                    Ver en el sitio
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </Link>
+                </div>
+                <form action={deleteService}>
                   <input type="hidden" name="id" value={service.id} />
                   <DeleteButton
                     label="Eliminar servicio"
-                    message={`¿Eliminar el servicio “${service.title}”?`}
+                    message={`¿Eliminar el servicio “${service.title}” y sus preguntas frecuentes?`}
                   />
                 </form>
-              </details>
+              </div>
             </article>
           );
-        })}
+          })
+        )}
       </div>
     </div>
   );

@@ -17,23 +17,27 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kaizen.com.uy"),
-  title: "Kaizen | Ingeniería de alimentos, calidad y regulatorios",
+  title: "Kaizen | Ingeniería de alimentos, calidad y gestión técnica",
   description:
-    "Ingeniería de alimentos, calidad, inocuidad y asuntos regulatorios. Acompañamos a su empresa desde el producto y el proceso hasta su habilitación, registro y comercialización.",
+    "Ingeniería de alimentos, calidad, inocuidad, dirección técnica, registros y habilitaciones. Acompañamos a su empresa desde el producto y el proceso hasta su llegada al mercado.",
   keywords: [
     "Kaizen",
     "ingeniería de alimentos",
     "inocuidad alimentaria",
-    "asuntos regulatorios",
+    "dirección técnica",
+    "registro de productos",
+    "habilitación de locales",
     "rotulado",
     "RUNAEV",
+    "LATU",
+    "MGAP",
     "Montevideo",
     "Uruguay",
   ],
   openGraph: {
-    title: "Kaizen | Ingeniería de alimentos, calidad y regulatorios",
+    title: "Kaizen | Ingeniería de alimentos, calidad y gestión técnica",
     description:
-      "Del producto al mercado, con criterio técnico. Ingeniería, calidad, inocuidad y regulatorios para la industria alimentaria.",
+      "Del producto al mercado, con criterio técnico. Ingeniería, calidad, inocuidad, registros y habilitaciones para la industria alimentaria.",
     locale: "es_UY",
     type: "website",
   },

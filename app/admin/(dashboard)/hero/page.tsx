@@ -15,7 +15,7 @@ export default async function AdminHeroPage({
 }) {
   const content = await getContent();
   const { hero } = content;
-  const supports = Array.from({ length: 3 }, (_, index) => hero.supportImages[index]);
+  const supports = Array.from({ length: 6 }, (_, index) => hero.supportImages[index]);
 
   return (
     <div className="space-y-7">
@@ -78,7 +78,8 @@ export default async function AdminHeroPage({
               Imágenes de apoyo
             </h2>
             <p className="mt-1 text-[11.5px] leading-5 text-muted">
-              Hasta tres imágenes para el grupo visual del hero. Podés reemplazarlas o quitarlas.
+              Hasta seis imágenes para el grupo visual del hero. La portada muestra las
+              primeras cuatro. Podés reemplazarlas o quitarlas.
             </p>
           </div>
 

@@ -65,12 +65,12 @@ export default function ContactForm({
   return (
     <form
       id="contact-form"
-      className="grid gap-4 rounded-[24px] border border-line bg-white p-5 shadow-card sm:grid-cols-2 sm:p-7"
+      className="form-navy grid gap-4 rounded-[22px] p-5 sm:grid-cols-2 sm:p-7"
       onSubmit={handleSubmit}
     >
       <div>
         <label htmlFor="name" className="field-label">
-          Nombre y apellido <span className="text-blue-text">*</span>
+          Nombre y apellido <span className="text-celeste">*</span>
         </label>
         <input
           id="name"
@@ -99,7 +99,7 @@ export default function ContactForm({
       </div>
       <div>
         <label htmlFor="email" className="field-label">
-          Correo electrónico <span className="text-blue-text">*</span>
+          Correo electrónico <span className="text-celeste">*</span>
         </label>
         <input
           id="email"
@@ -141,7 +141,7 @@ export default function ContactForm({
       </div>
       <div className="sm:col-span-2">
         <label htmlFor="message" className="field-label">
-          Mensaje <span className="text-blue-text">*</span>
+          Mensaje <span className="text-celeste">*</span>
         </label>
         <textarea
           id="message"
@@ -163,7 +163,7 @@ export default function ContactForm({
           {pending ? "Enviando..." : "Enviar consulta"}
           <ArrowRight className="h-[18px] w-[18px]" />
         </button>
-        <p className="max-w-[340px] text-[11.5px] leading-5 text-muted">
+        <p id="form-note" className="max-w-[340px] text-[11.5px] leading-5 text-navy-soft">
           La consulta queda registrada en nuestra bandeja interna para que el
           equipo pueda darle seguimiento.
         </p>
@@ -172,8 +172,8 @@ export default function ContactForm({
         id="form-status"
         role="status"
         aria-live="polite"
-        className={`min-h-[18px] text-[11.5px] font-semibold leading-5 sm:col-span-2 ${
-          error ? "text-[#a52a2a]" : "text-[#0b7a3b]"
+        className={`min-h-[20px] text-[11.5px] font-semibold leading-5 sm:col-span-2 ${
+          error ? "text-[#ffb4b4]" : "text-[#8ee6b0]"
         }`}
       >
         {status}

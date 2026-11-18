@@ -7,7 +7,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "node server.js",
-    "lint": "next lint"
+    "lint": "next lint",
+    "content:export": "node db/promote-content.js export",
+    "content:import": "node db/promote-content.js import"
   },
   "dependencies": {
     "@types/node": "20.16.11",

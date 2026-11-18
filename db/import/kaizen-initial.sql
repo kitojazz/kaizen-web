@@ -6,6 +6,21 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE IF NOT EXISTS `brands` (
+  `id` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `logo` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sort_order` int NOT NULL DEFAULT '99',
+  PRIMARY KEY (`id`),
+  KEY `idx_brands_order` (`sort_order`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+/*!40000 ALTER TABLE `brands` DISABLE KEYS */;
+INSERT INTO `brands` VALUES ('brand-arcor','Arcor','/images/marcas/logo-arcor.webp',1),('brand-cmpc','CMPC','/images/marcas/logo-cmpc.webp',2),('brand-cumbre','Cumbre','/images/marcas/logo-cumbre.webp',3),('brand-dea','DEA','/images/marcas/logo-dea.webp',4),('brand-hardrock','Hard Rock','/images/marcas/logo-hardrock.webp',5),('brand-kali','Kali','/images/marcas/logo-kali.webp',6),('brand-mccain','McCain','/images/marcas/logo-mccain.webp',7),('brand-starbucks','Starbucks','/images/marcas/logo-starbucks.webp',8),('brand-zensho','Zensho','/images/marcas/logo-zensho.webp',9);
+/*!40000 ALTER TABLE `brands` ENABLE KEYS */;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `hero` (
   `id` tinyint unsigned NOT NULL,
   `background_image` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -84,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `schema_migrations` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40000 ALTER TABLE `schema_migrations` DISABLE KEYS */;
-INSERT INTO `schema_migrations` VALUES ('001_init.sql','2026-11-04 14:41:55.172'),('seed:content.json','2026-11-04 14:41:55.181');
+INSERT INTO `schema_migrations` VALUES ('001_init.sql','2026-11-04 14:41:55.172'),('002_brands_team_gallery.sql','2026-11-10 18:00:00.000'),('seed:content.json','2026-11-04 14:41:55.181'),('seed:content.json:brands-gallery','2026-11-10 18:00:00.000');
 /*!40000 ALTER TABLE `schema_migrations` ENABLE KEYS */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -127,6 +142,21 @@ CREATE TABLE IF NOT EXISTS `team_members` (
 /*!40000 ALTER TABLE `team_members` DISABLE KEYS */;
 INSERT INTO `team_members` VALUES ('team-adelina','Adelina Rubio Galain','Ingeniería de alimentos','/images/team-adelina.webp','Aporta el conocimiento de producto y proceso: formulación, vida útil, escalado y coherencia técnica entre lo que se declara y lo que se elabora.','https://www.linkedin.com/in/adelina-rubio-galain-b683a32a2/',3),('team-bruno','Bruno Roggero Silva','Calidad e inocuidad alimentaria','/images/team-bruno.webp','Trabaja en sistemas de calidad, BPM, HACCP y auditorías, integrando los controles documentales con la operación real de la planta.','https://www.linkedin.com/in/bruno-roggero-silva-09a5772b2/',2),('team-rodrigo','Rodrigo Duran','Dirección técnica y asuntos regulatorios','/images/team-rodrigo.webp','Coordina los proyectos regulatorios y acompaña la relación con los organismos, desde el diagnóstico hasta la habilitación y el registro.','https://www.linkedin.com/in/rodrigo-duran-94201b83/',1),('team-vannina','Vannina Mirci','Ingeniería química y procesos','/images/team-vannina.webp','Aporta la mirada de ingeniería química y de procesos, con experiencia en la industria alimentaria, para que lo documentado refleje cómo se opera realmente.','https://www.linkedin.com/in/vannina-mirci-31a5a1191/',4);
 /*!40000 ALTER TABLE `team_members` ENABLE KEYS */;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE IF NOT EXISTS `team_gallery` (
+  `id` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alt` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `sort_order` int NOT NULL DEFAULT '99',
+  PRIMARY KEY (`id`),
+  KEY `idx_team_gallery_order` (`sort_order`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+/*!40000 ALTER TABLE `team_gallery` DISABLE KEYS */;
+INSERT INTO `team_gallery` VALUES ('gallery-01','/images/equipo/equipo-01.webp','',1),('gallery-02','/images/equipo/equipo-02.webp','',2),('gallery-03','/images/equipo/equipo-03.webp','',3),('gallery-04','/images/equipo/equipo-04.webp','',4),('gallery-05','/images/equipo/equipo-05.webp','',5),('gallery-06','/images/equipo/equipo-06.webp','',6),('gallery-07','/images/equipo/equipo-07.webp','',7);
+/*!40000 ALTER TABLE `team_gallery` ENABLE KEYS */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

@@ -12,6 +12,9 @@
   --blue-text: #0066cc;
   --blue-action: #0066cc;
   --navy: #0b1422;
+  --celeste: #7ccbff;
+  --navy-muted: #aebfd3;
+  --navy-deep: #07101a;
   --deep: #004994;
   --line: #dce6f1;
   --mist: #eaf3ff;
@@ -135,6 +138,15 @@ ul {
     }
   }
 
+  .mobile-carousel {
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+  }
+
+  .mobile-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
   .eyebrow {
     display: inline-flex;
     align-items: center;
@@ -156,7 +168,7 @@ ul {
   }
 
   .eyebrow-light {
-    color: #7ccbff;
+    color: var(--celeste);
   }
 
   .btn {
@@ -252,9 +264,9 @@ ul {
     display: block;
     margin-bottom: 7px;
     color: #42536a;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 800;
-    letter-spacing: 0.09em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 
@@ -285,6 +297,30 @@ ul {
 
   .field-input:disabled {
     background: #f3f7fb;
+  }
+
+  .form-navy .field-label {
+    color: var(--celeste);
+  }
+
+  .form-navy .field-input {
+    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+  }
+
+  .form-navy .field-input::placeholder {
+    color: rgba(185, 200, 218, 0.65);
+  }
+
+  .form-navy .field-input:focus {
+    border-color: rgba(124, 203, 255, 0.65);
+    box-shadow: 0 0 0 4px rgba(124, 203, 255, 0.12);
+  }
+
+  .form-navy select.field-input option {
+    background: var(--navy);
+    color: #fff;
   }
 
   .nav-link {
@@ -336,8 +372,8 @@ ul {
 
   .hero-card-overlay {
     background:
-      linear-gradient(90deg, rgba(7, 14, 26, 0.94) 0%, rgba(7, 14, 26, 0.86) 45%, rgba(7, 14, 26, 0.68) 100%),
-      linear-gradient(180deg, rgba(7, 14, 26, 0.52) 0%, rgba(7, 14, 26, 0.18) 45%, rgba(7, 14, 26, 0.62) 100%);
+      linear-gradient(90deg, rgba(7, 14, 26, 0.88) 0%, rgba(7, 14, 26, 0.8) 45%, rgba(7, 14, 26, 0.62) 100%),
+      linear-gradient(180deg, rgba(7, 14, 26, 0.46) 0%, rgba(7, 14, 26, 0.14) 45%, rgba(7, 14, 26, 0.56) 100%);
   }
 
   .service-photo-overlay {
@@ -381,6 +417,268 @@ ul {
     border-color: #c5d9ee;
     box-shadow: 0 24px 50px -36px rgba(12, 20, 34, 0.45);
   }
+
+  .navy-surface {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 22px;
+    background: var(--navy);
+    color: #fff;
+    box-shadow: 0 24px 54px -38px rgba(11, 20, 34, 0.8);
+  }
+
+  .navy-card {
+    overflow: hidden;
+    transition:
+      transform 0.35s ease,
+      border-color 0.35s ease,
+      box-shadow 0.35s ease;
+  }
+
+  .navy-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(124, 203, 255, 0.45);
+    box-shadow: 0 28px 56px -28px rgba(11, 20, 34, 0.9);
+  }
+
+  .navy-icon {
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--celeste);
+  }
+
+  .section-head {
+    padding-top: 20px;
+    border-top: 1px solid rgba(11, 20, 34, 0.12);
+  }
+
+  .step-number {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(8, 117, 233, 0.58);
+    font-size: 64px;
+    line-height: 0.9;
+    letter-spacing: -0.06em;
+  }
+
+  @supports not (-webkit-text-stroke: 1px #000) {
+    .step-number {
+      color: #b9d3ee;
+    }
+  }
+
+  .trust-carousel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(18px, 2.4vw, 28px);
+  }
+
+  .trust-marquee {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    padding-block: 5px;
+    margin-block: -5px;
+    mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  }
+
+  .trust-track {
+    display: flex;
+    width: max-content;
+    animation: trust-marquee 64s linear infinite;
+    will-change: transform;
+  }
+
+  .trust-marquee:hover .trust-track,
+  .trust-marquee:focus-within .trust-track {
+    animation-play-state: paused;
+  }
+
+  .trust-group {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: clamp(36px, 4.5vw, 64px);
+    padding-right: clamp(36px, 4.5vw, 64px);
+  }
+
+  .trust-logo {
+    position: relative;
+    flex: 0 0 auto;
+    width: 162px;
+    height: 48px;
+    transition: transform 0.25s ease;
+  }
+
+  .trust-logo:hover {
+    transform: scale(1.08);
+  }
+
+  .team-panel {
+    --team-pad: 28px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 430px;
+    padding: var(--team-pad);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 26px;
+    background: linear-gradient(145deg, #0b1422 0%, #101e33 58%, #0b1422 100%);
+  }
+
+  .team-panel::before {
+    content: "";
+    position: absolute;
+    right: -90px;
+    top: -100px;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124, 203, 255, 0.14), transparent 68%);
+  }
+
+  .team-panel::after {
+    content: "";
+    position: absolute;
+    right: 24px;
+    bottom: 22px;
+    width: 120px;
+    height: 120px;
+    background: url("/images/kaizen-symbol.png") center/contain no-repeat;
+    opacity: 0.06;
+    filter: invert(1);
+    pointer-events: none;
+  }
+
+  .team-gallery {
+    position: relative;
+    z-index: 1;
+    margin: 20px calc(var(--team-pad) * -1) 18px;
+  }
+
+  .team-viewport {
+    overflow: hidden;
+    padding-block: 4px;
+    mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  }
+
+  .team-track {
+    display: flex;
+    width: max-content;
+    animation: team-marquee 42s linear infinite;
+    will-change: transform;
+  }
+
+  .team-set {
+    display: flex;
+    gap: 12px;
+    padding-right: 12px;
+  }
+
+  .team-slide {
+    position: relative;
+    flex: 0 0 auto;
+    width: clamp(150px, 17vw, 190px);
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    background: var(--navy-deep);
+  }
+
+  .team-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .team-gallery:hover .team-track,
+  .team-gallery.is-paused .team-track {
+    animation-play-state: paused;
+  }
+
+  .commerce-photo {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: clamp(340px, 38%, 760px);
+    background:
+      linear-gradient(90deg, rgba(11, 20, 34, 0.12) 0%, rgba(11, 20, 34, 0.3) 45%, rgba(11, 20, 34, 0.48) 100%),
+      linear-gradient(0deg, rgba(11, 20, 34, 0.48), transparent 62%),
+      url("/images/mercados-bg.webp") center/cover no-repeat;
+    mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.12) 10%, rgba(0, 0, 0, 0.55) 26%, #000 42%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.12) 10%, rgba(0, 0, 0, 0.55) 26%, #000 42%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .team-card-copy {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    min-height: 4.65rem;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 1024px) {
+  .step-number {
+    font-size: 52px;
+  }
+}
+
+@media (max-width: 900px) {
+  .commerce-photo {
+    width: 100%;
+    background:
+      linear-gradient(90deg, rgba(11, 20, 34, 0.98) 0%, rgba(11, 20, 34, 0.94) 50%, rgba(11, 20, 34, 0.82) 78%, rgba(11, 20, 34, 0.72) 100%),
+      linear-gradient(0deg, rgba(11, 20, 34, 0.5), transparent 62%),
+      url("/images/mercados-bg.webp") right center/cover no-repeat;
+  }
+}
+
+@media (max-width: 640px) {
+  .step-number {
+    font-size: 42px;
+  }
+
+  .section-head {
+    padding-top: 16px;
+  }
+
+  .trust-carousel {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .trust-marquee {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .trust-track {
+    animation-duration: 42s;
+  }
+
+  .trust-group {
+    gap: 12px;
+    padding-right: 12px;
+  }
+
+  .trust-logo {
+    width: 112px;
+    height: 34px;
+  }
+
+  .team-panel {
+    --team-pad: 24px;
+    min-height: 390px;
+  }
 }
 
 @keyframes fade-up {
@@ -391,6 +689,18 @@ ul {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes trust-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes team-marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -406,5 +716,47 @@ ul {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .trust-track {
+    width: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: none;
+  }
+
+  .trust-group {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-right: 0;
+    gap: 18px 32px;
+  }
+
+  .trust-group[aria-hidden="true"] {
+    display: none;
+  }
+
+  .trust-marquee {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .team-track {
+    width: auto;
+    animation: none;
+  }
+
+  .team-viewport {
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: thin;
+    padding-inline: var(--team-pad);
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .team-set {
+    padding-right: 0;
   }
 }

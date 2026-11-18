@@ -54,3 +54,17 @@ export function paragraphs(text: string) {
     .map((paragraph) => paragraph.trim())
     .filter(Boolean);
 }
+
+export function normalizeText(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+export function whatsappHref(number: string, message: string) {
+  const digits = number.replace(/\D/g, "");
+  return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
+}

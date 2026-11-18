@@ -5,7 +5,11 @@ const fs = require("node:fs");
 const path = require("node:path");
 const mysql = require("mysql2/promise");
 const { dbConfig } = require("./config");
-const { seedInitialContent } = require("./seed");
+const {
+  seedInitialContent,
+  seedBrandsAndGallery,
+  seedServicePages,
+} = require("./seed");
 
 const MIGRATIONS_DIR = path.join(__dirname, "migrations");
 const LOCK_NAME = "kaizen_migrations";
@@ -43,6 +47,8 @@ async function migrate({ log = console.log } = {}) {
     }
 
     await seedInitialContent(connection, { log });
+    await seedBrandsAndGallery(connection, { log });
+    await seedServicePages(connection, { log });
     await connection.query("SELECT RELEASE_LOCK(?)", [LOCK_NAME]);
   } finally {
     await connection.end();

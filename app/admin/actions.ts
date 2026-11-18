@@ -10,15 +10,25 @@ import {
   validateCredentials,
 } from "@/lib/auth";
 import {
+  deleteBrand as removeBrand,
+  deleteFaq as removeFaq,
   deleteLead as removeLead,
   deletePost as removePost,
   deleteService as removeService,
+  deleteServiceCategory as removeServiceCategory,
   deleteTeamMember as removeTeamMember,
+  deleteTeamGalleryImage as removeTeamGalleryImage,
   getContent,
+  saveBrand,
+  saveFaq,
   savePost,
   saveHero,
   saveService,
+  saveServiceCategory,
+  saveSettings,
+  saveTeamGalleryImage,
   saveTeamMember,
+  serviceSlugExists,
   slugExists,
   toggleLead,
 } from "@/lib/content";
@@ -27,8 +37,12 @@ import { saveImageFile } from "@/lib/uploads";
 import { slugify } from "@/lib/utils";
 import type {
   BlogPost,
+  Brand,
   HeroSupportImage,
   Service,
+  ServiceCategory,
+  ServiceHighlight,
+  TeamGalleryImage,
   TeamMember,
 } from "@/lib/types";
 
@@ -74,6 +88,22 @@ function safeHref(value: string) {
     return href;
   }
   return "#contacto";
+}
+
+function parseHighlights(value: string): ServiceHighlight[] {
+  return value
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => {
+      const [title, ...rest] = line.split("|");
+      return { title: title.trim(), description: rest.join("|").trim() };
+    })
+    .filter((item) => item.title || item.description);
+}
+
+function adminPath(value: string, fallback: string) {
+  return value.startsWith("/admin") ? value : fallback;
 }
 
 function redirectWith(path: string, kind: NoticeKind, message: string): never {
@@ -149,6 +179,7 @@ export async function createTeamMember(data: FormData) {
       description,
       linkedin,
       order: numberValue(data, "order", 99),
+      showInHero: data.get("showInHero") === "on",
     };
 
     await saveTeamMember(member);
@@ -192,6 +223,7 @@ export async function updateTeamMember(data: FormData) {
       linkedin,
       photo,
       order: numberValue(data, "order", existing.order),
+      showInHero: data.get("showInHero") === "on",
     });
   } catch (caught) {
     error = errorMessage(caught);
@@ -206,6 +238,142 @@ export async function deleteTeamMember(data: FormData) {
   const id = text(data, "id");
   await removeTeamMember(id);
   redirectWith("/admin/equipo", "success", "Integrante eliminado.");
+}
+
+export async function createBrand(data: FormData) {
+  assertAdmin();
+  let error = "";
+
+  try {
+    const name = requireValue(text(data, "name"), "nombre");
+    const logo = await saveImageFile(data.get("logo"), {
+      folder: "brands",
+      width: 600,
+      quality: 88,
+    });
+    if (!logo) throw new Error("Seleccioná el logo de la marca.");
+
+    const brand: Brand = {
+      id: randomUUID(),
+      name,
+      logo,
+      order: numberValue(data, "order", 99),
+    };
+
+    await saveBrand(brand);
+  } catch (caught) {
+    error = errorMessage(caught);
+  }
+
+  if (error) redirectWith("/admin/marcas", "error", error);
+  redirectWith("/admin/marcas", "success", "Marca agregada.");
+}
+
+export async function updateBrand(data: FormData) {
+  assertAdmin();
+  let error = "";
+
+  try {
+    const id = requireValue(text(data, "id"), "marca");
+    const current = await getContent();
+    const existing = current.brands.find((brand) => brand.id === id);
+    if (!existing) throw new Error("La marca ya no existe.");
+
+    const name = requireValue(text(data, "name"), "nombre");
+    const uploaded = await saveImageFile(data.get("logo"), {
+      folder: "brands",
+      width: 600,
+      quality: 88,
+    });
+    const logo = uploaded || text(data, "currentLogo");
+    if (!logo) throw new Error("La marca necesita un logo.");
+
+    await saveBrand({
+      ...existing,
+      name,
+      logo,
+      order: numberValue(data, "order", existing.order),
+    });
+  } catch (caught) {
+    error = errorMessage(caught);
+  }
+
+  if (error) redirectWith("/admin/marcas", "error", error);
+  redirectWith("/admin/marcas", "success", "Marca actualizada.");
+}
+
+export async function deleteBrand(data: FormData) {
+  assertAdmin();
+  const id = text(data, "id");
+  await removeBrand(id);
+  redirectWith("/admin/marcas", "success", "Marca eliminada.");
+}
+
+export async function createGalleryImage(data: FormData) {
+  assertAdmin();
+  let error = "";
+
+  try {
+    const image = await saveImageFile(data.get("image"), {
+      folder: "team-gallery",
+      width: 900,
+      quality: 82,
+    });
+    if (!image) throw new Error("Seleccioná una fotografía para la galería.");
+
+    const item: TeamGalleryImage = {
+      id: randomUUID(),
+      image,
+      alt: text(data, "alt"),
+      order: numberValue(data, "order", 99),
+    };
+
+    await saveTeamGalleryImage(item);
+  } catch (caught) {
+    error = errorMessage(caught);
+  }
+
+  if (error) redirectWith("/admin/galeria", "error", error);
+  redirectWith("/admin/galeria", "success", "Fotografía agregada.");
+}
+
+export async function updateGalleryImage(data: FormData) {
+  assertAdmin();
+  let error = "";
+
+  try {
+    const id = requireValue(text(data, "id"), "fotografía");
+    const current = await getContent();
+    const existing = current.teamGallery.find((item) => item.id === id);
+    if (!existing) throw new Error("La fotografía ya no existe.");
+
+    const uploaded = await saveImageFile(data.get("image"), {
+      folder: "team-gallery",
+      width: 900,
+      quality: 82,
+    });
+    const image = uploaded || text(data, "currentImage");
+    if (!image) throw new Error("La fotografía necesita una imagen.");
+
+    await saveTeamGalleryImage({
+      ...existing,
+      image,
+      alt: text(data, "alt"),
+      order: numberValue(data, "order", existing.order),
+    });
+  } catch (caught) {
+    error = errorMessage(caught);
+  }
+
+  if (error) redirectWith("/admin/galeria", "error", error);
+  redirectWith("/admin/galeria", "success", "Fotografía actualizada.");
+}
+
+export async function deleteGalleryImage(data: FormData) {
+  assertAdmin();
+  const id = text(data, "id");
+  await removeTeamGalleryImage(id);
+  redirectWith("/admin/galeria", "success", "Fotografía eliminada.");
 }
 
 export async function updateHero(data: FormData) {
@@ -224,7 +392,7 @@ export async function updateHero(data: FormData) {
     if (!backgroundImage) throw new Error("Seleccioná la imagen de fondo del hero.");
 
     const supportImages: HeroSupportImage[] = [];
-    for (let index = 0; index < 3; index += 1) {
+    for (let index = 0; index < 6; index += 1) {
       const uploaded = await saveImageFile(data.get(`supportImage${index}`), {
         folder: "hero",
         width: 1200,
@@ -244,8 +412,7 @@ export async function updateHero(data: FormData) {
 
     await saveHero({
       backgroundImage,
-      backgroundAlt:
-        text(data, "backgroundAlt") || "Imagen principal de Kaizen alimentos",
+      backgroundAlt: text(data, "backgroundAlt") || "Imagen principal de Kaizen",
       supportImages,
     });
   } catch (caught) {
@@ -384,11 +551,25 @@ export async function createService(data: FormData) {
     });
     if (!image) throw new Error("Seleccioná una imagen para el servicio.");
 
+    const requestedSlug = slugify(text(data, "slug") || title) || `servicio-${Date.now()}`;
+    let slug = requestedSlug;
+    let suffix = 2;
+    while (await serviceSlugExists(slug)) {
+      slug = `${requestedSlug}-${suffix}`;
+      suffix += 1;
+    }
+
     const service: Service = {
       id: randomUUID(),
+      slug,
+      category: text(data, "category"),
       title,
       shortDescription,
       description,
+      intro: text(data, "intro"),
+      content: text(data, "content"),
+      highlights: parseHighlights(text(data, "highlights")),
+      relatedServiceId: text(data, "relatedServiceId") || undefined,
       image,
       imageAlt: text(data, "imageAlt") || title,
       icon: text(data, "icon") || "flask",
@@ -396,6 +577,9 @@ export async function createService(data: FormData) {
       keywords: text(data, "keywords"),
       ctaLabel: text(data, "ctaLabel") || "Consultar",
       ctaHref: safeHref(text(data, "ctaHref") || "#contacto"),
+      featured: data.get("featured") === "on",
+      seoTitle: text(data, "seoTitle"),
+      seoDescription: text(data, "seoDescription"),
       order: numberValue(data, "order", 99),
     };
 
@@ -435,11 +619,26 @@ export async function updateService(data: FormData) {
     const image = uploaded || text(data, "currentImage");
     if (!image) throw new Error("El servicio necesita una imagen.");
 
+    const requestedSlug =
+      slugify(text(data, "slug") || title) || existing.slug || `servicio-${Date.now()}`;
+    let slug = requestedSlug;
+    let suffix = 2;
+    while (await serviceSlugExists(slug, existing.id)) {
+      slug = `${requestedSlug}-${suffix}`;
+      suffix += 1;
+    }
+
     await saveService({
       ...existing,
+      slug,
+      category: text(data, "category"),
       title,
       shortDescription,
       description,
+      intro: text(data, "intro"),
+      content: text(data, "content"),
+      highlights: parseHighlights(text(data, "highlights")),
+      relatedServiceId: text(data, "relatedServiceId") || undefined,
       image,
       imageAlt: text(data, "imageAlt") || title,
       icon: text(data, "icon") || existing.icon,
@@ -447,6 +646,9 @@ export async function updateService(data: FormData) {
       keywords: text(data, "keywords"),
       ctaLabel: text(data, "ctaLabel") || "Consultar",
       ctaHref: safeHref(text(data, "ctaHref") || "#contacto"),
+      featured: data.get("featured") === "on",
+      seoTitle: text(data, "seoTitle"),
+      seoDescription: text(data, "seoDescription"),
       order: numberValue(data, "order", existing.order),
     });
   } catch (caught) {
@@ -462,6 +664,172 @@ export async function deleteService(data: FormData) {
   const id = text(data, "id");
   await removeService(id);
   redirectWith("/admin/servicios", "success", "Servicio eliminado.");
+}
+
+export async function createServiceCategory(data: FormData) {
+  assertAdmin();
+  let error = "";
+
+  try {
+    const name = requireValue(text(data, "name"), "nombre");
+    const category: ServiceCategory = {
+      id: randomUUID(),
+      name,
+      order: numberValue(data, "order", 99),
+    };
+    await saveServiceCategory(category);
+  } catch (caught) {
+    error = errorMessage(caught);
+  }
+
+  if (error) redirectWith("/admin/categorias", "error", error);
+  redirectWith("/admin/categorias", "success", "Categoría agregada.");
+}
+
+export async function updateServiceCategory(data: FormData) {
+  assertAdmin();
+  let error = "";
+
+  try {
+    const id = requireValue(text(data, "id"), "categoría");
+    const current = await getContent();
+    const existing = current.serviceCategories.find((category) => category.id === id);
+    if (!existing) throw new Error("La categoría ya no existe.");
+
+    const name = requireValue(text(data, "name"), "nombre");
+    await saveServiceCategory(
+      {
+        ...existing,
+        name,
+        order: numberValue(data, "order", existing.order),
+      },
+      existing.name,
+    );
+  } catch (caught) {
+    error = errorMessage(caught);
+  }
+
+  if (error) redirectWith("/admin/categorias", "error", error);
+  redirectWith("/admin/categorias", "success", "Categoría actualizada.");
+}
+
+export async function deleteServiceCategory(data: FormData) {
+  assertAdmin();
+  let error = "";
+  let affected = 0;
+
+  try {
+    const id = requireValue(text(data, "id"), "categoría");
+    const current = await getContent();
+    const existing = current.serviceCategories.find((category) => category.id === id);
+    if (!existing) throw new Error("La categoría ya no existe.");
+    affected = current.services.filter((service) => service.category === existing.name).length;
+    await removeServiceCategory(id);
+  } catch (caught) {
+    error = errorMessage(caught);
+  }
+
+  if (error) redirectWith("/admin/categorias", "error", error);
+  redirectWith(
+    "/admin/categorias",
+    "success",
+    affected > 0
+      ? `Categoría eliminada. ${affected} servicios quedaron sin categoría.`
+      : "Categoría eliminada.",
+  );
+}
+
+export async function createFaq(data: FormData) {
+  assertAdmin();
+  let error = "";
+  const serviceId = text(data, "serviceId");
+  const back = adminPath(text(data, "redirectTo"), "/admin/servicios");
+
+  try {
+    const question = requireValue(text(data, "question"), "pregunta");
+    const answer = requireValue(text(data, "answer"), "respuesta");
+    await saveFaq({
+      id: randomUUID(),
+      serviceId: serviceId || undefined,
+      question,
+      answer,
+      order: numberValue(data, "order", 99),
+    });
+  } catch (caught) {
+    error = errorMessage(caught);
+  }
+
+  if (error) redirectWith(back, "error", error);
+  redirectWith(back, "success", "Pregunta agregada.");
+}
+
+export async function updateFaq(data: FormData) {
+  assertAdmin();
+  let error = "";
+  const back = adminPath(text(data, "redirectTo"), "/admin/servicios");
+
+  try {
+    const id = requireValue(text(data, "id"), "pregunta");
+    const current = await getContent();
+    const existing = current.faqs.find((faq) => faq.id === id);
+    if (!existing) throw new Error("La pregunta ya no existe.");
+
+    await saveFaq({
+      ...existing,
+      question: requireValue(text(data, "question"), "pregunta"),
+      answer: requireValue(text(data, "answer"), "respuesta"),
+      order: numberValue(data, "order", existing.order),
+    });
+  } catch (caught) {
+    error = errorMessage(caught);
+  }
+
+  if (error) redirectWith(back, "error", error);
+  redirectWith(back, "success", "Pregunta actualizada.");
+}
+
+export async function deleteFaq(data: FormData) {
+  assertAdmin();
+  const id = text(data, "id");
+  await removeFaq(id);
+  redirectWith(
+    adminPath(text(data, "redirectTo"), "/admin/servicios"),
+    "success",
+    "Pregunta eliminada.",
+  );
+}
+
+export async function updateSettings(data: FormData) {
+  assertAdmin();
+  let error = "";
+
+  try {
+    await saveSettings({
+      contactEmail: requireValue(text(data, "contactEmail"), "correo"),
+      whatsappNumber: requireValue(text(data, "whatsappNumber"), "número de WhatsApp"),
+      whatsappDisplay: requireValue(text(data, "whatsappDisplay"), "número visible"),
+      heroEyebrow: requireValue(text(data, "heroEyebrow"), "antetítulo del hero"),
+      heroTitle: requireValue(text(data, "heroTitle"), "H1 principal"),
+      heroTitleAccent: requireValue(text(data, "heroTitleAccent"), "H1 principal destacado"),
+      heroSubheading: requireValue(text(data, "heroSubheading"), "H2 comercial"),
+      heroParagraph: requireValue(text(data, "heroParagraph"), "párrafo del hero"),
+      homeSeoTitle: requireValue(text(data, "homeSeoTitle"), "título SEO"),
+      homeSeoDescription: requireValue(text(data, "homeSeoDescription"), "metadescripción"),
+      trustTitle: requireValue(text(data, "trustTitle"), "título de la franja de marcas"),
+      contactAddress:
+        text(data, "contactAddress") || "Av. Gral. Paz 1481, Montevideo",
+      contactAddressUrl: safeHref(
+        text(data, "contactAddressUrl") ||
+          "https://www.google.com/maps/search/?api=1&query=Av.%20Gral.%20Paz%201481%2C%20Montevideo%2C%20Uruguay",
+      ),
+      contactEmailProposed: text(data, "contactEmailProposed"),
+    });
+  } catch (caught) {
+    error = errorMessage(caught);
+  }
+
+  if (error) redirectWith("/admin/sitio", "error", error);
+  redirectWith("/admin/sitio", "success", "Textos del sitio actualizados.");
 }
 
 export async function toggleLeadStatus(data: FormData) {

@@ -121,14 +121,14 @@ export default async function BlogPostPage({
                 ))}
               </div>
 
-              <div className="mt-10 rounded-[26px] border border-line bg-white p-6 shadow-card sm:p-8">
-                <p className="text-[9.5px] font-extrabold uppercase tracking-[0.16em] text-blue-text">
+              <div className="navy-surface mt-10 rounded-[26px] p-6 sm:p-8">
+                <p className="text-[9.5px] font-extrabold uppercase tracking-[0.16em] text-celeste">
                   ¿Quiere revisar su caso?
                 </p>
-                <h2 className="mt-2 font-display text-[clamp(24px,3vw,32px)] font-extrabold leading-[1.1] tracking-[-0.04em] text-ink">
+                <h2 className="mt-2 font-display text-[clamp(24px,3vw,32px)] font-extrabold leading-[1.1] tracking-[-0.04em] text-white">
                   Lo vemos con criterio técnico.
                 </h2>
-                <p className="mt-2 max-w-[540px] text-[13px] leading-6 text-body">
+                <p className="mt-2 max-w-[540px] text-[13px] leading-6 text-navy-soft">
                   Cuéntenos en qué etapa está su producto o empresa y le
                   indicamos los próximos pasos.
                 </p>
@@ -141,7 +141,7 @@ export default async function BlogPostPage({
                     href="https://wa.me/59899082776?text=Hola%2C%20quisiera%20consultar%20por%20los%20servicios%20de%20Kaizen."
                     target="_blank"
                     rel="noopener"
-                    className="btn btn-dark btn-sm"
+                    className="btn btn-ghost btn-sm"
                   >
                     WhatsApp
                     <WhatsApp className="h-4 w-4" />
