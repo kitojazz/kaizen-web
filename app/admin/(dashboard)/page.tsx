@@ -7,6 +7,8 @@ import {
   ImageIcon,
   Inbox,
   Layers,
+  Sparkle,
+  Tag,
   Users,
 } from "@/components/icons";
 import { getContent } from "@/lib/content";
@@ -32,6 +34,20 @@ export default async function AdminDashboardPage({
       icon: Users,
     },
     {
+      label: "Marcas",
+      value: content.brands.length,
+      detail: "En el carrusel de la portada",
+      href: "/admin/marcas",
+      icon: Tag,
+    },
+    {
+      label: "Fotos de galería",
+      value: content.teamGallery.length,
+      detail: "En el carrusel del equipo",
+      href: "/admin/galeria",
+      icon: ImageIcon,
+    },
+    {
       label: "Artículos",
       value: content.posts.length,
       detail: `${published.length} publicados`,
@@ -44,6 +60,13 @@ export default async function AdminDashboardPage({
       detail: "Visibles en el sitio",
       href: "/admin/servicios",
       icon: Layers,
+    },
+    {
+      label: "Categorías",
+      value: content.serviceCategories.length,
+      detail: "Pestañas de servicios",
+      href: "/admin/categorias",
+      icon: Tag,
     },
     {
       label: "Mensajes nuevos",
@@ -64,7 +87,7 @@ export default async function AdminDashboardPage({
 
       <AdminNotice notice={searchParams?.notice} message={searchParams?.message} />
 
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
         {stats.map((stat) => {
           const Icon = stat.icon;
           return (
@@ -175,6 +198,24 @@ export default async function AdminDashboardPage({
               </p>
               <span className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-[0.08em] text-blue-text">
                 Gestionar equipo
+                <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+              </span>
+            </div>
+          </Link>
+          <Link
+            href="/admin/sitio"
+            className="group flex items-start gap-4 rounded-[22px] border border-line bg-white p-5 transition hover:border-[#bdd4ea]"
+          >
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-mist text-blue">
+              <Sparkle className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="text-[12.5px] font-bold text-ink">Textos del sitio</p>
+              <p className="mt-1 text-[10.5px] leading-5 text-body">
+                Correo, WhatsApp y los textos principales de la portada.
+              </p>
+              <span className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-[0.08em] text-blue-text">
+                Editar textos
                 <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
               </span>
             </div>

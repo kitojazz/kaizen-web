@@ -102,6 +102,17 @@ export default async function AdminTeamPage({
                   className="field-input"
                 />
               </div>
+              <div className="flex items-end pb-2">
+                <label className="flex items-center gap-2 text-[12px] font-semibold text-ink">
+                  <input
+                    type="checkbox"
+                    name="showInHero"
+                    className="h-4 w-4"
+                    defaultChecked
+                  />
+                  Mostrar en el hero de la portada
+                </label>
+              </div>
               <div className="sm:col-span-2">
                 <label htmlFor="linkedin" className="field-label">
                   LinkedIn
@@ -232,6 +243,17 @@ export default async function AdminTeamPage({
                           defaultValue={member.order}
                           className="field-input"
                         />
+                      </div>
+                      <div className="flex items-end pb-2">
+                        <label className="flex items-center gap-2 text-[12px] font-semibold text-ink">
+                          <input
+                            type="checkbox"
+                            name="showInHero"
+                            className="h-4 w-4"
+                            defaultChecked={member.showInHero}
+                          />
+                          Mostrar en el hero de la portada
+                        </label>
                       </div>
                       <div className="sm:col-span-2">
                         <label className="field-label" htmlFor={`linkedin-${member.id}`}>

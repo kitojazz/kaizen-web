@@ -1,4 +1,17 @@
 {
+  "settings": {
+    "contactEmail": "rodrigo@kaizen.com.uy",
+    "whatsappNumber": "59899082776",
+    "whatsappDisplay": "+598 99 082 776",
+    "heroEyebrow": "Kaizen",
+    "heroTitle": "Ingeniería y consultoría",
+    "heroTitleAccent": "alimentaria en Uruguay",
+    "heroSubheading": "Que su producto llegue a góndola, sin sorpresas.",
+    "heroParagraph": "Brindamos soluciones integrales para la industria alimentaria, acompañando a su empresa en dirección técnica, habilitaciones bromatológicas, registro de productos, calidad e inocuidad alimentaria",
+    "homeSeoTitle": "Ingeniería y Consultoría Alimentaria en Uruguay | Kaizen",
+    "homeSeoDescription": "Consultoría alimentaria en Uruguay. Especialistas en habilitaciones bromatológicas, registro de productos, dirección técnica, calidad e inocuidad.",
+    "trustTitle": "Empresas que han confiado en Kaizen"
+  },
   "hero": {
     "backgroundImage": "/images/hero-food-factory.webp",
     "backgroundAlt": "Operario supervisando una línea de producción en una planta alimentaria",
@@ -17,6 +30,11 @@
         "id": "hero-support-3",
         "image": "/images/team-adelina.webp",
         "alt": "Adelina, ingeniería de alimentos"
+      },
+      {
+        "id": "hero-support-4",
+        "image": "/images/team-vannina.webp",
+        "alt": "Vannina, ingeniería química y procesos"
       }
     ]
   },
@@ -134,8 +152,8 @@
       "slug": "residuos-no-perder-de-vista-las-obligaciones",
       "title": "Residuos: no perder de vista las obligaciones.",
       "tag": "Ambiente y residuos",
-      "excerpt": "Plan de control de plagas, declaración jurada y documentación de seguimiento.",
-      "content": "De todos los trámites, este es el que más se posterga, no porque sea complicado, sino porque no tiene la urgencia visible de una habilitación o un registro de producto. Y sin embargo, es parte de lo que se revisa en cualquier auditoría.\n\nLo que la normativa pide, en general, se resume en un plan de control de plagas activo, una declaración jurada de residuos, y la documentación de seguimiento que respalde ambos puntos en el tiempo.\n\nLa buena noticia es que, una vez que este circuito queda armado, no vuelve a demandar tiempo. Nuestra recomendación es simple: resolverlo en paralelo con la habilitación del local, no como un trámite aparte.",
+      "excerpt": "Declaración jurada, plan de gestión y documentación de seguimiento.",
+      "content": "De todos los trámites, este es el que más se posterga, no porque sea complicado, sino porque no tiene la urgencia visible de una habilitación o un registro de producto. Y sin embargo, es parte de lo que se revisa en cualquier auditoría.\n\nLo que la normativa pide, en general, se resume en una declaración jurada de residuos, un plan de gestión y la documentación de seguimiento que respalde ambos puntos en el tiempo.\n\nLa buena noticia es que, una vez que este circuito queda armado, no vuelve a demandar tiempo. Nuestra recomendación es simple: resolverlo en paralelo con la habilitación del local, no como un trámite aparte.",
       "coverImage": "/images/blog/blog-residuos.webp",
       "coverAlt": "Contenedores para la clasificación de residuos",
       "published": true,
@@ -146,10 +164,292 @@
   ],
   "services": [
     {
+      "id": "service-direccion-tecnica",
+      "slug": "direccion-tecnica",
+      "title": "Dirección Técnica",
+      "shortDescription": "Acompañamiento técnico permanente y representación ante los organismos.",
+      "description": "Asumimos la dirección técnica de su planta o empresa: ordenamos las obligaciones, revisamos el sistema y acompañamos inspecciones, auditorías y desvíos con criterio técnico.",
+      "intro": "La dirección técnica no es solo una firma. Es el respaldo técnico que sostiene las decisiones del día a día y la relación con los organismos.",
+      "content": "La dirección técnica es la figura que respalda técnicamente a la empresa frente a los organismos y dentro de la propia operación. Cuando se asume en serio, ordena obligaciones, prioriza brechas y da criterio para decidir.\n\n## Qué incluye\n\n- Revisión del sistema vigente y de las obligaciones aplicables a su rubro.\n- Acompañamiento técnico permanente para consultas de producto, proceso y cumplimiento.\n- Preparación y acompañamiento en inspecciones y auditorías.\n- Seguimiento de desvíos, acciones correctivas y actualización documental.\n- Representación técnica ante los organismos cuando corresponde.\n\n## Cómo trabajamos\n\nEmpezamos con un diagnóstico del estado actual: qué está resuelto, qué falta y qué riesgos conviene atender primero. A partir de ahí definimos una rutina de seguimiento y un canal directo para las consultas del día a día.\n\nEl objetivo no es acumular documentación, sino que la empresa tenga una referencia técnica clara para sostener sus decisiones y sus plazos.",
+      "highlights": [
+        {
+          "title": "Diagnóstico y ordenamiento",
+          "description": "Revisamos el sistema y priorizamos las brechas que más impactan."
+        },
+        {
+          "title": "Acompañamiento en inspecciones",
+          "description": "Preparamos la visita y coordinamos con los organismos."
+        },
+        {
+          "title": "Seguimiento continuo",
+          "description": "Informes, desvíos y actualización de obligaciones."
+        }
+      ],
+      "relatedServiceId": "service-registro-productos",
+      "image": "/images/service-quality.webp",
+      "imageAlt": "Revisión técnica en una planta alimentaria",
+      "icon": "users",
+      "labels": [
+        "Dirección técnica"
+      ],
+      "keywords": "direccion tecnica responsable tecnico acompanamiento permanente organismos representacion auditoria inspeccion",
+      "ctaLabel": "Consultar",
+      "ctaHref": "/#contacto",
+      "featured": true,
+      "seoTitle": "Dirección Técnica | Kaizen",
+      "seoDescription": "Acompañamiento técnico permanente, representación ante organismos e inspecciones para empresas alimentarias.",
+      "order": 1
+    },
+    {
+      "id": "service-registro-productos",
+      "slug": "registro-de-productos",
+      "title": "Registro de Productos",
+      "shortDescription": "Registro de productos y empresas ante los organismos que correspondan.",
+      "description": "Ordenamos el expediente, revisamos requisitos y acompañamos la presentación y el seguimiento del registro de empresa, local y producto, incluida la importación.",
+      "intro": "Registrar no es solo presentar un formulario: es demostrar que el producto y la empresa cumplen lo que declaran.",
+      "content": "El registro de productos se apoya en tres capas distintas que la normativa mira por separado: la empresa, el local y el producto. Según el rubro, puede necesitar una, dos o las tres.\n\n## Qué incluye\n\n- Revisión de requisitos aplicables a su categoría de producto.\n- Ordenamiento del expediente y de la documentación de respaldo.\n- Presentación y seguimiento ante los organismos.\n- Registro de empresa, local y producto cuando corresponde.\n- Renovaciones y actualizaciones antes del vencimiento.\n- Acompañamiento en importación y exportación.\n\n## Cómo evitamos idas y vueltas\n\nLa mayoría de las demoras no vienen del organismo, sino de expedientes incompletos o inconsistentes. Revisamos la documentación antes de presentar y coordinamos el ida y vuelta para que el trámite avance sin sorpresas.",
+      "highlights": [
+        {
+          "title": "Expediente completo",
+          "description": "Ordenamos formularios y respaldos antes de presentar."
+        },
+        {
+          "title": "Presentación y seguimiento",
+          "description": "Gestionamos el trámite y su ida y vuelta con el organismo."
+        },
+        {
+          "title": "Renovaciones al día",
+          "description": "Avisamos y preparamos las actualizaciones antes del vencimiento."
+        }
+      ],
+      "relatedServiceId": "service-habilitacion-locales",
+      "image": "/images/service-regulatory.webp",
+      "imageAlt": "Operario controlando una línea de procesamiento de alimentos",
+      "icon": "file",
+      "labels": [
+        "RUNAEV",
+        "Registro"
+      ],
+      "keywords": "registro productos runaev msp empresa local producto importacion exportacion certificado renovacion expediente",
+      "ctaLabel": "Consultar",
+      "ctaHref": "/#contacto",
+      "featured": true,
+      "seoTitle": "Registro de Productos | Kaizen",
+      "seoDescription": "Registro de empresa, local y producto, presentación y seguimiento ante los organismos.",
+      "order": 2
+    },
+    {
+      "id": "service-habilitacion-locales",
+      "slug": "habilitacion-de-locales",
+      "title": "Habilitación de Locales",
+      "shortDescription": "Habilitación de locales y acompañamiento en los trámites que dependen de terceros.",
+      "description": "Definimos los requisitos según el rubro, revisamos el local antes de la inspección y coordinamos los trámites con los organismos y técnicos que correspondan.",
+      "intro": "Habilitar un local es más simple cuando los requisitos se conocen antes de alquilar, reformar o abrir.",
+      "content": "La habilitación de un local depende del rubro, la actividad y la superficie. Lo que cambia es el alcance, no la lógica: primero se definen los requisitos, después se prepara el local y recién entonces se inspecciona.\n\n## Qué incluye\n\n- Definición de requisitos aplicables según actividad y rubro.\n- Revisión del local y de la documentación antes de la inspección.\n- Acompañamiento en la presentación ante el organismo.\n- Coordinación con Bomberos, SIME y otros técnicos habilitados cuando corresponde.\n- Seguimiento de observaciones hasta la resolución.\n\n## Qué hacemos y qué coordina un tercero\n\nKaizen acompaña el proceso y ordena la documentación técnica. La ejecución de instalaciones, planos y trámites que exigen firma de un profesional habilitado se coordina con terceros; nuestro rol es que todo llegue en orden a la inspección.",
+      "highlights": [
+        {
+          "title": "Requisitos por rubro",
+          "description": "Definimos qué aplica según actividad y superficie."
+        },
+        {
+          "title": "Revisión previa",
+          "description": "Verificamos el local y la documentación antes de la inspección."
+        },
+        {
+          "title": "Coordinación con terceros",
+          "description": "Acompañamos Bomberos, SIME y técnicos habilitados."
+        }
+      ],
+      "relatedServiceId": "service-registro-productos",
+      "image": "/images/hero-food-factory.webp",
+      "imageAlt": "Local de elaboración de alimentos",
+      "icon": "building",
+      "labels": [
+        "Habilitación"
+      ],
+      "keywords": "habilitacion locales local rubro planos bomberos sime inspeccion requisitos habilitacion comercial",
+      "ctaLabel": "Consultar",
+      "ctaHref": "/#contacto",
+      "featured": true,
+      "seoTitle": "Habilitación de Locales | Kaizen",
+      "seoDescription": "Requisitos, revisión previa y acompañamiento en la habilitación de locales alimentarios.",
+      "order": 3
+    },
+    {
+      "id": "service-labeling",
+      "slug": "rotulado-de-alimentos",
+      "title": "Rotulado de alimentos",
+      "shortDescription": "Información correcta y una presentación coherente con el producto real.",
+      "description": "Revisamos declaraciones, ingredientes, alérgenos, información nutricional, imágenes y legibilidad. La etiqueta debe cumplir la norma y sostener exactamente lo que el producto es.",
+      "intro": "La etiqueta es la carta de presentación del producto y, también, una declaración técnica que tiene que poder respaldarse.",
+      "content": "El rotulado combina cumplimiento legal y coherencia técnica. No alcanza con que los datos obligatorios estén: tienen que ser correctos, legibles y consistentes con lo que el producto realmente es.\n\n## Qué revisamos\n\n- Denominación, ingredientes y orden de la lista.\n- Información nutricional y porciones.\n- Alérgenos y declaraciones especiales, como “libre de gluten” u “orgánico”.\n- Imágenes y textos que puedan sugerir algo que el producto no tiene.\n- Legibilidad, tamaño de letra y ubicación de la información.\n\n## Cuándo conviene revisarlo\n\nAntes de imprimir. Un ajuste en el archivo digital es simple; reimprimir etiquetas, no. También conviene revisar el rótulo cuando cambia la formulación, el proveedor o una certificación que sostiene una declaración.",
+      "highlights": [
+        {
+          "title": "Revisión legal y técnica",
+          "description": "Cada declaración tiene que poder sostenerse con respaldo."
+        },
+        {
+          "title": "Información nutricional",
+          "description": "Cálculo, formato y coherencia con la formulación."
+        },
+        {
+          "title": "Imágenes y declaraciones",
+          "description": "Que la etiqueta represente exactamente el producto."
+        }
+      ],
+      "relatedServiceId": "service-safety",
+      "image": "/images/service-labeling.webp",
+      "imageAlt": "Persona rotulando una caja con marcador",
+      "icon": "tag",
+      "labels": [
+        "Rotulado"
+      ],
+      "keywords": "rotulado etiqueta etiquetas rotulo declaracion nutricional ingredientes alergenos gluten libre de gluten organicos organico informacion nutricional",
+      "ctaLabel": "Consultar",
+      "ctaHref": "/#contacto",
+      "featured": false,
+      "seoTitle": "Rotulado de alimentos | Kaizen",
+      "seoDescription": "Revisión de etiquetas, información nutricional, alérgenos y declaraciones para la industria alimentaria.",
+      "order": 4
+    },
+    {
+      "id": "service-safety",
+      "slug": "inocuidad-alimentaria",
+      "title": "Inocuidad alimentaria",
+      "shortDescription": "BPM, POES, HACCP y controles para prevenir peligros en los alimentos.",
+      "description": "Implementamos BPM, POES y HACCP, revisamos peligros, trazabilidad y controles. El foco está en prevenir y en poder demostrarlo con registros.",
+      "intro": "Inocuidad es prevenir: identificar peligros, controlarlos en la operación y dejar evidencia de que el control funciona.",
+      "content": "La inocuidad alimentaria se sostiene en tres capas que conviene distinguir: las buenas prácticas de manufactura (BPM), los procedimientos de saneamiento (POES) y el sistema HACCP. Cada una tiene un alcance distinto y las tres se complementan.\n\n## Qué incluye\n\n- Diagnóstico de la operación y de los peligros asociados al producto y al proceso.\n- Implementación de BPM y POES, con registros simples de mantener.\n- Desarrollo del plan HACCP: puntos críticos, límites y verificaciones.\n- Trazabilidad y control de proveedores.\n- Capacitación del equipo y preparación para auditorías.\n\n## Cómo se demuestra\n\nCon registros que reflejen la operación real. Un sistema de inocuidad no es un manual guardado: es lo que el equipo hace todos los días y puede mostrar cuando se lo revisan.",
+      "highlights": [
+        {
+          "title": "BPM y POES",
+          "description": "Prácticas y saneamiento integrados a la operación real."
+        },
+        {
+          "title": "Plan HACCP",
+          "description": "Peligros, puntos críticos y verificaciones documentadas."
+        },
+        {
+          "title": "Trazabilidad",
+          "description": "Registros que permiten seguir el producto y responder."
+        }
+      ],
+      "relatedServiceId": "service-quality",
+      "image": "/images/service-safety.webp",
+      "imageAlt": "Operaria verificando productos en una planta alimentaria",
+      "icon": "shield",
+      "labels": [
+        "HACCP",
+        "BPM"
+      ],
+      "keywords": "inocuidad bpm poes haccp plagas trazabilidad control peligros capacitacion auditoria",
+      "ctaLabel": "Consultar",
+      "ctaHref": "/#contacto",
+      "featured": false,
+      "seoTitle": "Inocuidad alimentaria | Kaizen",
+      "seoDescription": "Implementación de BPM, POES y HACCP, trazabilidad y preparación para auditorías.",
+      "order": 5
+    },
+    {
+      "id": "service-ambiente-residuos",
+      "slug": "ambiente-y-residuos",
+      "title": "Ambiente y residuos",
+      "shortDescription": "Declaraciones juradas, gestión de residuos y envases.",
+      "description": "Acompañamos las obligaciones ambientales de la empresa: declaración jurada de residuos, planes de gestión, envases y documentación de seguimiento.",
+      "intro": "Las obligaciones ambientales no tienen la urgencia visible de una habilitación, pero se revisan en auditorías y conviene resolverlas en paralelo.",
+      "content": "Las obligaciones ambientales suelen quedar postergadas porque no frenan la operación. Sin embargo, forman parte de lo que se revisa en una auditoría y de la documentación que la empresa debe poder mostrar.\n\n## Qué incluye\n\n- Declaración jurada de residuos y actualizaciones.\n- Plan de gestión de residuos y su seguimiento.\n- Gestión de envases y de los circuitos asociados.\n- Documentación de respaldo y coordinación con los organismos.\n- Integración con la habilitación del local y con el sistema de inocuidad.\n\n## Cómo lo ordenamos\n\nArmamos un calendario de obligaciones y dejamos el circuito documental funcionando. La idea es que, una vez resuelto, no vuelva a demandar tiempo cada vez que se acerca un vencimiento.",
+      "highlights": [
+        {
+          "title": "Declaración jurada",
+          "description": "Preparamos y actualizamos la declaración de residuos."
+        },
+        {
+          "title": "Plan de gestión",
+          "description": "Definimos el circuito y su documentación de seguimiento."
+        },
+        {
+          "title": "Envases y vencimientos",
+          "description": "Ordenamos obligaciones y avisamos antes de cada plazo."
+        }
+      ],
+      "relatedServiceId": "service-registro-productos",
+      "image": "/images/blog/blog-residuos.webp",
+      "imageAlt": "Contenedores para la clasificación de residuos",
+      "icon": "leaf",
+      "labels": [
+        "Residuos",
+        "Ambiente"
+      ],
+      "keywords": "ambiente residuos declaracion jurada pgr envases gestion residuos plan ambiental",
+      "ctaLabel": "Consultar",
+      "ctaHref": "/#contacto",
+      "featured": false,
+      "seoTitle": "Ambiente y residuos | Kaizen",
+      "seoDescription": "Declaración jurada de residuos, planes de gestión, envases y seguimiento ambiental.",
+      "order": 6
+    },
+    {
+      "id": "service-latu-sigla-vehiculos",
+      "slug": "latu-sigla-y-vehiculos",
+      "title": "LATU/SIGLA y vehículos",
+      "shortDescription": "Gestiones ante LATU/SIGLA y habilitación de vehículos ante MGAP.",
+      "description": "Acompañamos los trámites ante LATU/SIGLA y la habilitación de vehículos de transporte de alimentos ante MGAP, con la documentación y el seguimiento que cada gestión requiere.",
+      "intro": "Los trámites de LATU/SIGLA y de vehículos tienen requisitos propios y conviene encararlos con la misma lógica que el resto de las habilitaciones.",
+      "content": "Además de los registros de producto y local, muchas empresas necesitan resolver gestiones específicas ante LATU/SIGLA y habilitar los vehículos que transportan alimentos ante MGAP.\n\n## LATU / SIGLA\n\nAcompañamos la presentación y el seguimiento de las gestiones que se realizan ante LATU/SIGLA, revisando antes la documentación y los requisitos aplicables a cada caso.\n\n## Vehículos y MGAP\n\nLa habilitación de vehículos para transporte de alimentos se gestiona ante MGAP. Revisamos las condiciones del vehículo, la documentación y el circuito de habilitación para que la presentación llegue completa.\n\n## Qué incluye\n\n- Revisión de requisitos según el tipo de gestión.\n- Ordenamiento de la documentación de respaldo.\n- Presentación y seguimiento ante LATU/SIGLA y MGAP.\n- Coordinación con las demás habilitaciones de la empresa.",
+      "highlights": [
+        {
+          "title": "LATU / SIGLA",
+          "description": "Revisión, presentación y seguimiento de cada gestión."
+        },
+        {
+          "title": "Vehículos",
+          "description": "Habilitación para transporte de alimentos ante MGAP."
+        },
+        {
+          "title": "Documentación en orden",
+          "description": "Evitamos observaciones por expedientes incompletos."
+        }
+      ],
+      "relatedServiceId": "service-registro-productos",
+      "image": "/images/blog/blog-importaciones.webp",
+      "imageAlt": "Contenedores de carga en un puerto",
+      "icon": "globe",
+      "labels": [
+        "LATU",
+        "SIGLA",
+        "MGAP"
+      ],
+      "keywords": "latu sigla vehiculos mgap transporte habilitacion vehiculo importacion exportacion camion",
+      "ctaLabel": "Consultar",
+      "ctaHref": "/#contacto",
+      "featured": false,
+      "seoTitle": "LATU/SIGLA y vehículos | Kaizen",
+      "seoDescription": "Gestiones ante LATU/SIGLA y habilitación de vehículos de transporte de alimentos ante MGAP.",
+      "order": 7
+    },
+    {
       "id": "service-engineering",
+      "slug": "ingenieria-de-alimentos",
       "title": "Ingeniería de alimentos",
       "shortDescription": "Desarrollo, reformulación y mejora de productos y procesos alimentarios.",
       "description": "Trabajamos en formulación, vida útil, escalado y transferencia a planta. El objetivo es que el producto sea viable técnica y comercialmente, con un proceso reproducible y documentado.",
+      "intro": "Desarrollar un producto es resolver, al mismo tiempo, la formulación, el proceso y la forma de demostrar que se puede repetir.",
+      "content": "Trabajamos en formulación, vida útil, escalado y transferencia a planta. El objetivo es que el producto sea viable técnica y comercialmente, con un proceso reproducible y documentado.\n\n## Qué incluye\n\n- Desarrollo y reformulación de productos.\n- Definición de proceso y parámetros críticos.\n- Estudios de vida útil y validaciones.\n- Escalado y transferencia a planta.\n- Documentación técnica del producto y del proceso.\n\n## Cómo lo encaramos\n\nPartimos de la idea comercial y la bajamos a formulación y proceso. Cada decisión se documenta para que la planta pueda repetir el resultado sin depender de la memoria de quien lo desarrolló.",
+      "highlights": [
+        {
+          "title": "Formulación",
+          "description": "Desarrollo y reformulación con criterio técnico y comercial."
+        },
+        {
+          "title": "Vida útil",
+          "description": "Estudios y validaciones para sostener la fecha declarada."
+        },
+        {
+          "title": "Escalado",
+          "description": "Transferencia a planta con proceso reproducible."
+        }
+      ],
+      "relatedServiceId": "service-quality",
       "image": "/images/service-engineering.webp",
       "imageAlt": "Elaboración de quesos en una planta alimentaria",
       "icon": "flask",
@@ -159,47 +459,35 @@
       ],
       "keywords": "ingenieria alimentos desarrollo reformulacion producto proceso vida util escalado mermas formulacion",
       "ctaLabel": "Consultar",
-      "ctaHref": "#contacto",
-      "order": 1
-    },
-    {
-      "id": "service-regulatory",
-      "title": "Asuntos regulatorios",
-      "shortDescription": "Habilitaciones, registros y gestiones ante los organismos que correspondan.",
-      "description": "Ordenamos el expediente, revisamos requisitos y acompañamos la presentación y el seguimiento ante los organismos. Cubre empresa, local, producto, importación y exportación.",
-      "image": "/images/service-regulatory.webp",
-      "imageAlt": "Operario controlando una línea de procesamiento de alimentos",
-      "icon": "file",
-      "labels": [
-        "RUNAEV",
-        "Importar"
-      ],
-      "keywords": "regulatorios runaev msp habilitacion registro empresa local producto importar importacion exportar certificacion sanitario documentacion",
-      "ctaLabel": "Consultar",
-      "ctaHref": "#contacto",
-      "order": 2
-    },
-    {
-      "id": "service-labeling",
-      "title": "Rotulado de alimentos",
-      "shortDescription": "Información correcta y una presentación coherente con el producto real.",
-      "description": "Revisamos declaraciones, ingredientes, alérgenos, nutrición, imágenes y legibilidad. La etiqueta debe cumplir la norma y sostener exactamente lo que el producto es.",
-      "image": "/images/service-labeling.webp",
-      "imageAlt": "Persona rotulando una caja con marcador",
-      "icon": "tag",
-      "labels": [
-        "Rotulado"
-      ],
-      "keywords": "rotulado etiqueta etiquetas rotulo declaracion nutricional ingredientes organicos organico",
-      "ctaLabel": "Consultar",
-      "ctaHref": "#contacto",
-      "order": 3
+      "ctaHref": "/#contacto",
+      "featured": false,
+      "seoTitle": "Ingeniería de alimentos | Kaizen",
+      "seoDescription": "Desarrollo, reformulación, vida útil y escalado de productos y procesos alimentarios.",
+      "order": 8
     },
     {
       "id": "service-quality",
+      "slug": "calidad",
       "title": "Calidad",
       "shortDescription": "Sistemas, auditorías y herramientas para controlar y mejorar su operación.",
       "description": "Diseñamos sistemas de gestión, auditorías internas, indicadores y tratamiento de desvíos. Buscamos controles útiles para la operación, no documentación de archivo.",
+      "intro": "Un sistema de calidad sirve cuando ayuda a decidir y a mejorar, no cuando termina archivado.",
+      "content": "Diseñamos sistemas de gestión, auditorías internas, indicadores y tratamiento de desvíos. Buscamos controles útiles para la operación, no documentación de archivo.\n\n## Qué incluye\n\n- Sistemas de gestión y documentación asociada.\n- Auditorías internas y preparación para auditorías externas.\n- Indicadores, reclamos y tratamiento de desvíos.\n- Evaluación y seguimiento de proveedores.\n- Mejora continua con acciones concretas.",
+      "highlights": [
+        {
+          "title": "Sistema de gestión",
+          "description": "Documentación y controles alineados a la operación."
+        },
+        {
+          "title": "Auditorías",
+          "description": "Preparación, ejecución y seguimiento de hallazgos."
+        },
+        {
+          "title": "Mejora continua",
+          "description": "Indicadores y desvíos con acciones verificables."
+        }
+      ],
+      "relatedServiceId": "service-safety",
       "image": "/images/service-quality.webp",
       "imageAlt": "Control de calidad de envases de vidrio en una fábrica",
       "icon": "badge",
@@ -208,31 +496,35 @@
       ],
       "keywords": "calidad sistema gestion auditoria auditorias proveedores indicadores no conformidad reclamos mejora continua",
       "ctaLabel": "Consultar",
-      "ctaHref": "#contacto",
-      "order": 4
-    },
-    {
-      "id": "service-safety",
-      "title": "Inocuidad alimentaria",
-      "shortDescription": "BPM, POES, HACCP y controles para prevenir peligros en los alimentos.",
-      "description": "Implementamos BPM, POES y HACCP, revisamos peligros, trazabilidad, plagas y residuos. El foco está en prevenir y en poder demostrarlo con registros.",
-      "image": "/images/service-safety.webp",
-      "imageAlt": "Operaria verificando productos en una planta alimentaria",
-      "icon": "shield",
-      "labels": [
-        "HACCP",
-        "Residuos"
-      ],
-      "keywords": "inocuidad bpm poes haccp residuos plagas trazabilidad control peligros capacitacion",
-      "ctaLabel": "Consultar",
-      "ctaHref": "#contacto",
-      "order": 5
+      "ctaHref": "/#contacto",
+      "featured": false,
+      "seoTitle": "Calidad | Kaizen",
+      "seoDescription": "Sistemas de gestión, auditorías, indicadores y mejora continua para la industria alimentaria.",
+      "order": 9
     },
     {
       "id": "service-documentation",
+      "slug": "gestion-documental",
       "title": "Gestión documental",
       "shortDescription": "Manuales, procedimientos y registros pensados para utilizarse.",
       "description": "Armamos manuales, procedimientos y registros simples de mantener. La documentación se diseña alrededor del proceso real para que el equipo pueda usarla todos los días.",
+      "intro": "La documentación funciona cuando el equipo puede usarla todos los días, no solo cuando aparece una auditoría.",
+      "content": "Armamos manuales, procedimientos y registros simples de mantener. La documentación se diseña alrededor del proceso real para que el equipo pueda usarla todos los días.\n\n## Qué incluye\n\n- Manuales y procedimientos.\n- Registros operativos y de control.\n- Control de versiones y cambios.\n- Organización del expediente técnico.\n- Capacitación para el uso diario.",
+      "highlights": [
+        {
+          "title": "Manuales y procedimientos",
+          "description": "Documentos claros, breves y aplicables."
+        },
+        {
+          "title": "Registros",
+          "description": "Formatos que se completan en la operación real."
+        },
+        {
+          "title": "Expediente ordenado",
+          "description": "Versiones y respaldos listos para una revisión."
+        }
+      ],
+      "relatedServiceId": "service-quality",
       "image": "/images/service-documentation.webp",
       "imageAlt": "Documentos de control sobre una caja de packaging",
       "icon": "folder",
@@ -241,8 +533,284 @@
       ],
       "keywords": "documental documentacion manuales procedimientos registros sistema expediente",
       "ctaLabel": "Consultar",
-      "ctaHref": "#contacto",
+      "ctaHref": "/#contacto",
+      "featured": false,
+      "seoTitle": "Gestión documental | Kaizen",
+      "seoDescription": "Manuales, procedimientos y registros simples de mantener para empresas alimentarias.",
+      "order": 10
+    }
+  ],
+  "faqs": [
+    {
+      "id": "faq-global-1",
+      "question": "¿Trabajan con empresas de cualquier tamaño?",
+      "answer": "Sí. Acompañamos desde emprendimientos que están dando sus primeros pasos hasta plantas con operación consolidada. El alcance y la dedicación se ajustan a cada caso.",
+      "order": 1
+    },
+    {
+      "id": "faq-global-2",
+      "question": "¿Pueden acompañar un trámite que ya está en curso?",
+      "answer": "Sí. Revisamos el expediente y el estado actual, ordenamos lo que falta y retomamos el seguimiento con el organismo.",
+      "order": 2
+    },
+    {
+      "id": "faq-global-3",
+      "question": "¿Trabajan en todo el país?",
+      "answer": "Sí. Nuestra base está en Montevideo, pero acompañamos empresas de todo Uruguay y coordinamos visitas a planta cuando el trabajo lo requiere.",
+      "order": 3
+    },
+    {
+      "id": "faq-global-4",
+      "question": "¿Cómo empieza el trabajo?",
+      "answer": "Con una primera conversación técnica para entender su caso. A partir de ahí le indicamos qué información necesitamos y le proponemos un alcance con próximos pasos.",
+      "order": 4
+    },
+    {
+      "id": "faq-direccion-1",
+      "serviceId": "service-direccion-tecnica",
+      "question": "¿Qué implica asumir la dirección técnica?",
+      "answer": "Implica respaldar técnicamente a la empresa, ordenar sus obligaciones y acompañar las decisiones de producto, proceso y cumplimiento. No es solo una firma: supone seguimiento y criterio técnico.",
+      "order": 1
+    },
+    {
+      "id": "faq-direccion-2",
+      "serviceId": "service-direccion-tecnica",
+      "question": "¿Pueden representarnos ante una inspección o auditoría?",
+      "answer": "Sí. Preparamos la instancia, revisamos la documentación y acompañamos la visita. Después trabajamos sobre las observaciones hasta cerrarlas.",
+      "order": 2
+    },
+    {
+      "id": "faq-direccion-3",
+      "serviceId": "service-direccion-tecnica",
+      "question": "¿Con qué frecuencia hay seguimiento?",
+      "answer": "Depende de la operación y de las obligaciones de cada empresa. Definimos una rutina de seguimiento y un canal directo para consultas del día a día.",
+      "order": 3
+    },
+    {
+      "id": "faq-registro-1",
+      "serviceId": "service-registro-productos",
+      "question": "¿Qué diferencia hay entre registrar la empresa, el local y el producto?",
+      "answer": "Son tres capas distintas. La empresa es el responsable; el local es el espacio físico; el producto se registra en sí mismo. Según el rubro puede necesitar una, dos o las tres.",
+      "order": 1
+    },
+    {
+      "id": "faq-registro-2",
+      "serviceId": "service-registro-productos",
+      "question": "¿Cuánto demora un registro?",
+      "answer": "Depende del tipo de producto y de la carga del organismo. Lo que sí controlamos es que el expediente esté completo antes de presentarlo, para evitar demoras por observaciones.",
+      "order": 2
+    },
+    {
+      "id": "faq-registro-3",
+      "serviceId": "service-registro-productos",
+      "question": "¿Se ocupan de las renovaciones?",
+      "answer": "Sí. Llevamos un calendario de vencimientos y preparamos las actualizaciones antes de que el trámite se venza.",
+      "order": 3
+    },
+    {
+      "id": "faq-habilitacion-1",
+      "serviceId": "service-habilitacion-locales",
+      "question": "¿Qué necesito para habilitar un local?",
+      "answer": "Depende del rubro, la actividad y la superficie. Primero definimos los requisitos aplicables, después revisamos el local y la documentación, y recién entonces se presenta la habilitación.",
+      "order": 1
+    },
+    {
+      "id": "faq-habilitacion-2",
+      "serviceId": "service-habilitacion-locales",
+      "question": "¿Kaizen hace los trámites de Bomberos y SIME?",
+      "answer": "Acompañamos y coordinamos esas gestiones. La ejecución de instalaciones y los trámites que exigen firma de un profesional habilitado se realizan con terceros; nuestro rol es que todo llegue en orden.",
+      "order": 2
+    },
+    {
+      "id": "faq-habilitacion-3",
+      "serviceId": "service-habilitacion-locales",
+      "question": "¿Pueden revisar un local antes de alquilarlo?",
+      "answer": "Sí, y es lo recomendable. Revisar el local antes de firmar evita tener que hacer reformas costosas después.",
+      "order": 3
+    },
+    {
+      "id": "faq-rotulado-1",
+      "serviceId": "service-labeling",
+      "question": "¿Qué revisan de una etiqueta?",
+      "answer": "Denominación, ingredientes, alérgenos, información nutricional, declaraciones, imágenes y legibilidad. También verificamos que cada declaración tenga respaldo técnico.",
+      "order": 1
+    },
+    {
+      "id": "faq-rotulado-2",
+      "serviceId": "service-labeling",
+      "question": "¿Pueden declarar “libre de gluten”?",
+      "answer": "Podemos revisar si la declaración corresponde y qué respaldo exige. La etiqueta tiene que poder sostenerse frente a un control, no solo verse bien.",
+      "order": 2
+    },
+    {
+      "id": "faq-rotulado-3",
+      "serviceId": "service-labeling",
+      "question": "¿Cada cuánto hay que actualizar el rótulo?",
+      "answer": "Cuando cambia la formulación, el proveedor, una certificación o la normativa aplicable. También conviene revisarlo antes de cada reimpresión.",
+      "order": 3
+    },
+    {
+      "id": "faq-inocuidad-1",
+      "serviceId": "service-safety",
+      "question": "¿Implementan BPM y HACCP desde cero?",
+      "answer": "Sí. Partimos de un diagnóstico de la operación, implementamos BPM y POES, y desarrollamos el plan HACCP con registros que el equipo pueda sostener.",
+      "order": 1
+    },
+    {
+      "id": "faq-inocuidad-2",
+      "serviceId": "service-safety",
+      "question": "¿Qué es POES y por qué importa?",
+      "answer": "Son los procedimientos de saneamiento: limpieza y desinfección, control de plagas y otros controles de higiene. Sostienen la base sobre la que se apoya el resto del sistema.",
+      "order": 2
+    },
+    {
+      "id": "faq-inocuidad-3",
+      "serviceId": "service-safety",
+      "question": "¿Cómo se demuestra la trazabilidad?",
+      "answer": "Con registros que permitan seguir el producto desde la materia prima hasta la salida. Lo importante es que reflejen la operación real y se puedan revisar rápido.",
+      "order": 3
+    },
+    {
+      "id": "faq-ambiente-1",
+      "serviceId": "service-ambiente-residuos",
+      "question": "¿Qué es la declaración jurada de residuos?",
+      "answer": "Es la declaración que presenta la empresa sobre los residuos que genera y su gestión. Requiere respaldo documental y actualizaciones periódicas.",
+      "order": 1
+    },
+    {
+      "id": "faq-ambiente-2",
+      "serviceId": "service-ambiente-residuos",
+      "question": "¿Cómo se relaciona con la habilitación del local?",
+      "answer": "Conviene resolverla en paralelo. Forma parte de la documentación que se revisa y evita observaciones cuando llega una auditoría o una inspección.",
+      "order": 2
+    },
+    {
+      "id": "faq-ambiente-3",
+      "serviceId": "service-ambiente-residuos",
+      "question": "¿Incluye la gestión de envases?",
+      "answer": "Sí. Ordenamos las obligaciones asociadas a envases y dejamos el circuito documental funcionando para los vencimientos.",
+      "order": 3
+    },
+    {
+      "id": "faq-latu-1",
+      "serviceId": "service-latu-sigla-vehiculos",
+      "question": "¿Qué se gestiona ante LATU/SIGLA?",
+      "answer": "Depende del caso: pueden ser ensayos, certificaciones o gestiones específicas de producto. Revisamos qué aplica antes de presentar.",
+      "order": 1
+    },
+    {
+      "id": "faq-latu-2",
+      "serviceId": "service-latu-sigla-vehiculos",
+      "question": "¿Qué trámites de vehículos cubren?",
+      "answer": "La habilitación de vehículos para transporte de alimentos ante MGAP, con revisión de condiciones y documentación.",
+      "order": 2
+    },
+    {
+      "id": "faq-latu-3",
+      "serviceId": "service-latu-sigla-vehiculos",
+      "question": "¿También gestionan ante MGAP?",
+      "answer": "Sí. Acompañamos las gestiones ante MGAP que correspondan, incluida la habilitación de vehículos.",
+      "order": 3
+    }
+  ],
+  "brands": [
+    {
+      "id": "brand-arcor",
+      "name": "Arcor",
+      "logo": "/images/marcas/logo-arcor.webp",
+      "order": 1
+    },
+    {
+      "id": "brand-cmpc",
+      "name": "CMPC",
+      "logo": "/images/marcas/logo-cmpc.webp",
+      "order": 2
+    },
+    {
+      "id": "brand-cumbre",
+      "name": "Cumbre",
+      "logo": "/images/marcas/logo-cumbre.webp",
+      "order": 3
+    },
+    {
+      "id": "brand-dea",
+      "name": "DEA",
+      "logo": "/images/marcas/logo-dea.webp",
+      "order": 4
+    },
+    {
+      "id": "brand-hardrock",
+      "name": "Hard Rock",
+      "logo": "/images/marcas/logo-hardrock.webp",
+      "order": 5
+    },
+    {
+      "id": "brand-kali",
+      "name": "Kali",
+      "logo": "/images/marcas/logo-kali.webp",
       "order": 6
+    },
+    {
+      "id": "brand-mccain",
+      "name": "McCain",
+      "logo": "/images/marcas/logo-mccain.webp",
+      "order": 7
+    },
+    {
+      "id": "brand-starbucks",
+      "name": "Starbucks",
+      "logo": "/images/marcas/logo-starbucks.webp",
+      "order": 8
+    },
+    {
+      "id": "brand-zensho",
+      "name": "Zensho",
+      "logo": "/images/marcas/logo-zensho.webp",
+      "order": 9
+    }
+  ],
+  "teamGallery": [
+    {
+      "id": "gallery-01",
+      "image": "/images/equipo/equipo-01.webp",
+      "alt": "",
+      "order": 1
+    },
+    {
+      "id": "gallery-02",
+      "image": "/images/equipo/equipo-02.webp",
+      "alt": "",
+      "order": 2
+    },
+    {
+      "id": "gallery-03",
+      "image": "/images/equipo/equipo-03.webp",
+      "alt": "",
+      "order": 3
+    },
+    {
+      "id": "gallery-04",
+      "image": "/images/equipo/equipo-04.webp",
+      "alt": "",
+      "order": 4
+    },
+    {
+      "id": "gallery-05",
+      "image": "/images/equipo/equipo-05.webp",
+      "alt": "",
+      "order": 5
+    },
+    {
+      "id": "gallery-06",
+      "image": "/images/equipo/equipo-06.webp",
+      "alt": "",
+      "order": 6
+    },
+    {
+      "id": "gallery-07",
+      "image": "/images/equipo/equipo-07.webp",
+      "alt": "",
+      "order": 7
     }
   ],
   "leads": []

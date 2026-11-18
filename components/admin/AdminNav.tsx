@@ -8,15 +8,21 @@ import {
   Inbox,
   Layers,
   LayoutDashboard,
+  Sparkle,
+  Tag,
   Users,
 } from "@/components/icons";
 
 const links = [
   { href: "/admin", label: "Resumen", icon: LayoutDashboard },
   { href: "/admin/equipo", label: "Equipo", icon: Users },
+  { href: "/admin/galeria", label: "Galería", icon: ImageIcon },
+  { href: "/admin/marcas", label: "Marcas", icon: Tag },
   { href: "/admin/hero", label: "Hero", icon: ImageIcon },
+  { href: "/admin/sitio", label: "Textos del sitio", icon: Sparkle },
   { href: "/admin/blog", label: "Blog", icon: FileText },
   { href: "/admin/servicios", label: "Servicios", icon: Layers },
+  { href: "/admin/categorias", label: "Categorías", icon: Tag },
   { href: "/admin/mensajes", label: "Mensajes", icon: Inbox },
 ];
 

@@ -8,7 +8,7 @@ import { getContent, getPublishedPosts } from "@/lib/content";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Blog | Kaizen alimentos",
+  title: "Blog | Kaizen",
   description:
     "Notas sobre habilitaciones, rotulado, importaciones, calidad e inocuidad para la industria alimentaria.",
 };
